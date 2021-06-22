@@ -1,4 +1,5 @@
 *.log
 *.db
-target/*
-bin/*
+*.iml
+*.idea
+Java/out
