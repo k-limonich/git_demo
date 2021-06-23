@@ -1,4 +1,4 @@
-package epam.training;
+package epamTraining;
 
 import java.util.Random;
 import java.util.Scanner;
