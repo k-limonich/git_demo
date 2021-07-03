@@ -45,7 +45,7 @@ public class Optional1 {
 				break;
 
 			default:
-				throw new IllegalStateException("Unexpected value: " + choice);
+				throw new IllegalArgumentException("Unexpected value: " + choice);
 		}
 	}
 	static int menu() {
