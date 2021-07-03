@@ -49,7 +49,7 @@ public class Optional1 {
 		}
 	}
 	static int menu() {
-		System.out.println("Optional task program");
+		System.out.println("Optional Task 1");
 		System.out.println("Choose an option:");
 		System.out.println("1 - Find longest and shortest numbers");
 		System.out.println("2 - Display numbers in ascending (descending) length order");
