@@ -117,16 +117,16 @@ public class Solution {
 		int newMatrixSize = matrix.length - 1;
 		ArrayList<Integer> newMatrix = new ArrayList<>();
 
-		for (int element : initialMatrixElements) {        							//
-			newMatrix.add(element);                           						/*copy elements*/
-		}                                                                           //
+		for (int element : initialMatrixElements) {        							/*copy elements*/
+			newMatrix.add(element);
+		}
 
 		for (int row = 0; row < matrix.length; row++) {								/*find max*/
-			for (int column = 0; column < matrix[row].length; column++) {			//
-				if (matrix[row][column] > maxElement) {								//
-					maxElement = matrix[row][column];								//
-					maxElementRow = row;											//
-					maxElementColumn = column;										//
+			for (int column = 0; column < matrix[row].length; column++) {
+				if (matrix[row][column] > maxElement) {
+					maxElement = matrix[row][column];
+					maxElementRow = row;
+					maxElementColumn = column;
 				}
 			}
 		}
