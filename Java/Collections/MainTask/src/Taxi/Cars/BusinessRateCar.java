@@ -1,0 +1,39 @@
+package Taxi.Cars;
+
+import Taxi.Brands.BusinessRateBrand;
+
+import java.util.Objects;
+
+public class BusinessRateCar extends Car{
+	private BusinessRateBrand brand;
+
+	public BusinessRateCar(double value, double gasConsumption, int mileage,
+						   int averageSpeed, BusinessRateBrand brand) {
+		super(value, gasConsumption, mileage, averageSpeed);
+		this.brand = brand;
+	}
+
+	public BusinessRateBrand getBrand() { return brand; }
+
+	@Override
+	public String toString() {
+		return super.toString().replace("[",
+				 "[Brand: " + brand +
+							", Model: " + brand.getModel() +
+							", ");
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+		BusinessRateCar businessRateCar = (BusinessRateCar) o;
+		return brand == businessRateCar.brand;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), brand);
+	}
+}
