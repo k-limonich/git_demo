@@ -7,8 +7,8 @@ import java.util.Objects;
 public class ComfortRateCar extends Car{
 	ComfortRateBrand brand;
 
-	public ComfortRateCar(double value, double gasConsumption, int mileage,
-						  int averageSpeed, ComfortRateBrand brand) {
+	public ComfortRateCar(int value, double gasConsumption, int mileage,
+						  double averageSpeed, ComfortRateBrand brand) {
 		super(value, gasConsumption, mileage, averageSpeed);
 		this.brand = brand;
 	}
@@ -18,9 +18,9 @@ public class ComfortRateCar extends Car{
 	@Override
 	public String toString() {
 		return super.toString().replace("[",
-				 "[Brand: " + brand +
-							", Model: " + brand.getModel() +
-							", ");
+				 "[Brand: " + brand + " " +
+							"| Model: " + brand.getModel() + " " +
+							"| ");
 	}
 
 	@Override

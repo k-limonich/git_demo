@@ -1,7 +1,7 @@
 package Taxi.Brands;
 
 public enum BusinessRateBrand {
-	MERCEDES_BENZ("E-class"), BMW("5"), AUDI("A6");
+	MERCEDES("E-class"), BMW("5"), AUDI("A6");
 
 	private String model;
 

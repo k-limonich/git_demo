@@ -3,22 +3,22 @@ package Taxi.Cars;
 import java.util.Objects;
 
 public abstract class Car {
-	private double value;
+	private int value;
 	private double gasConsumption;
 	private int mileage;
-	private int averageSpeed;
+	private double averageSpeed;
 
-	public Car(double value, double gasConsumption,
-			   int mileage, int averageSpeed) {
+	public Car(int value, double gasConsumption,
+			   int mileage, double averageSpeed) {
 		this.value = value;
 		this.gasConsumption = gasConsumption;
 		this.mileage = mileage;
 		this.averageSpeed = averageSpeed;
 	}
 
-	public double getValue() { return value; }
+	public int getValue() { return value; }
 
-	public void setValue(double value) { this.value = value; }
+	public void setValue(int value) { this.value = value; }
 
 	public double getGasConsumption() { return gasConsumption; }
 
@@ -28,17 +28,16 @@ public abstract class Car {
 
 	public void setMileage(int mileage) { this.mileage = mileage; }
 
-	public int getAverageSpeed() { return averageSpeed; }
+	public double getAverageSpeed() { return averageSpeed; }
 
-	public void setAverageSpeed(int averageSpeed) { this.averageSpeed = averageSpeed; }
+	public void setAverageSpeed(double averageSpeed) { this.averageSpeed = averageSpeed; }
 
 	@Override
 	public String toString() {
-		return "Car [" +
-				"Value: " + value +
-				", Gas consumption: " + gasConsumption +
-				", Mileage: " + mileage +
-				", Average speed: " + averageSpeed +
+		return  "[Value: " + value + " " +
+				"| Gas consumption: " + gasConsumption + " " +
+				"| Mileage: " + mileage + " " +
+				"| Average speed: " + averageSpeed +
 				']';
 	}
 
