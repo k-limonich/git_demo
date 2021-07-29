@@ -1,0 +1,3 @@
+Writing "Hello World" in Java is all I can do
+Violets are blue
+Roses are red
