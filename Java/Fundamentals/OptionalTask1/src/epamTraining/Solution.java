@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Solution {
 
-	public static void findShortestAndLongestNumber(int[] numbers) {
+	public void findShortestAndLongestNumber(int[] numbers) {
 		int shortestNumber = 0;
 		int shortestNumberLength = Integer.MAX_VALUE;
 		int longestNumber = 0;
@@ -28,50 +28,16 @@ public class Solution {
 				longestNumberLength + " digit(-s)");
 	}
 
-	private static int calculateNumberLength(int number) {
+	private int calculateNumberLength(int number) {
 		if (number == 0) {
 			return 1;
 		}
 		return (number > 0 ? (int) (Math.log10(number) + 1) : (int) (Math.log10(Math.abs(number)) + 1));
 	}
 
-	private static void quickSort(int[] array, int leftBorder, int rightBorder) {
-		int leftMarker = leftBorder;
-		int rightMarker = rightBorder;
-		int pivot = array[(leftMarker + rightMarker) / 2];
-
-		do {
-			while (calculateNumberLength(array[leftMarker]) < calculateNumberLength(pivot)) {
-				leftMarker++;
-			}
-			while (calculateNumberLength(array[rightMarker]) > calculateNumberLength(pivot)) {
-				rightMarker--;
-			}
-			if (leftMarker <= rightMarker) {
-				if (leftMarker < rightMarker) {
-					int temp = array[leftMarker];				//swap
-					array[leftMarker] = array[rightMarker];		//
-					array[rightMarker] = temp;					//
-				}
-				leftMarker++;
-				rightMarker--;
-			}
-		} while (leftMarker <= rightMarker);
-		if (leftMarker < rightBorder) {
-			quickSort(array, leftMarker, rightBorder);
-		}
-
-		if (leftBorder < rightMarker) {
-			quickSort(array, leftBorder, rightMarker);
-		}
-	}
-
-	public static void displayNumbersSortedByLength(int[] numbers) {
-		quickSort(numbers, 0, numbers.length - 1);
-		System.out.println("Numbers in ascending order by length:");
-		for (int number : numbers) {
-			System.out.print(number + " ");
-		}
+	public void displayNumbersSortedByLength(int[] numbers) {
+		Arrays.sort(numbers);
+		System.out.println("Numbers in ascending order by length:\n" + Arrays.toString(numbers));
 		System.out.println("\nNumbers in descending order by length:");
 		for (int i = numbers.length - 1; i >= 0; i--) {
 			System.out.print(numbers[i] + " ");
@@ -79,76 +45,68 @@ public class Solution {
 		System.out.println();
 	}
 
-	private static int findAverageNumberLengthValue(int[] numbers) {
+	private int findAverageNumberLengthValue(int[] numbers) {
 		int sumOfAverageNumberLengthValues = 0;
 
 		for (int number : numbers) {
 			sumOfAverageNumberLengthValues += calculateNumberLength(number);
 		}
-		return sumOfAverageNumberLengthValues / numbers.length;
+		return (sumOfAverageNumberLengthValues / numbers.length);
 	}
 
-	public static void displayNumbersWithDifferentFromAverageLength(int[] numbers) {
+	public void displayNumbersWithDifferentLengthFromAverage(int[] numbers) {
 		int averageNumberLength = findAverageNumberLengthValue(numbers);
 
 		System.out.println("Numbers with more than average length:");
 		for (int number : numbers) {
-			int numberLength = calculateNumberLength(number);
-			if (numberLength > averageNumberLength) {
+			if (calculateNumberLength(number) > averageNumberLength) {
 				System.out.print(number + " ");
 			}
-
 		}
 		System.out.println("\nNumbers with less than average length:");
 		for (int number : numbers) {
-			int numberLength = calculateNumberLength(number);
-			if (numberLength < averageNumberLength) {
+			if (calculateNumberLength(number) < averageNumberLength) {
 				System.out.print(number + " ");
 			}
 		}
 	}
 
-	public static void findNumberWithLeastAmountOfDifferentDigits(int[] numbers) {
-		int leastNumberOfDifferentDigits = Integer.MAX_VALUE;
+	public void findNumberWithLeastAmountOfDifferentDigits(int[] numbers) {
+		int leastNumberOfDifferentDigits = findAmountOfDifferentDigits(numbers[0]);
 		int numberWithLeastAmountOfDifferentDigits = numbers[0];
 
-		for (int number : numbers) {
-			Stack<Integer> numberDigits = new Stack<>();
-			int numberCopy = number;
-			while (numberCopy != 0) {
-				int digit = numberCopy % 10;
-				numberDigits.push(digit);
-				numberCopy /= 10;
-			}
-			int differentDigitsCounter = findAmountOfDifferentDigits(numberDigits);
+		for (int i = 1; i < numbers.length; i++) {
+			int differentDigitsCounter = findAmountOfDifferentDigits(numbers[i]);
 			if (differentDigitsCounter < leastNumberOfDifferentDigits) {
 				leastNumberOfDifferentDigits = differentDigitsCounter;
-				numberWithLeastAmountOfDifferentDigits = number;
+				numberWithLeastAmountOfDifferentDigits = numbers[i];
 			}
 		}
 		System.out.println("Number with least amount of different digits: " + numberWithLeastAmountOfDifferentDigits);
 	}
 
-	private static int findAmountOfDifferentDigits(Stack<Integer> numberDigits) {
-		int differentDigitsCounter = 1;
+	private int findAmountOfDifferentDigits(int number) {
+		int numberOfDifferentDigits = 0;
+		int[] numbersOfOccurrencesOfEachDigit = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		int numberCopy = number;
 
-		Collections.sort(numberDigits);
-		if (numberDigits.size() != 1) {
-			int digitForComparison = numberDigits.pop();
-			while (!numberDigits.isEmpty()) {
-				if (digitForComparison != numberDigits.peek()) {
-					differentDigitsCounter++;
-				}
-
-				if (!numberDigits.isEmpty()) {
-					digitForComparison = numberDigits.pop();
-				}
+		if (number == 0) {
+			return 1;
+		}
+		while(numberCopy != 0) {
+			int digit = numberCopy % 10;
+			numbersOfOccurrencesOfEachDigit[digit]++;
+			numberCopy /= 10;
+		}
+		for (int numberOfOccurrences : numbersOfOccurrencesOfEachDigit) {
+			if (numberOfOccurrences != 0) {
+				numberOfDifferentDigits++;
 			}
 		}
-		return differentDigitsCounter;
+		return numberOfDifferentDigits;
 	}
 
-	public static void findQuantityOfNumbersWithEvenDigitsOnly(int[] numbers) {
+	public void findQuantityOfNumbersWithEvenDigitsOnly(int[] numbers) {
 		int quantityOfNumbersWithEvenDigitsOnly = 0;
 		boolean isEvenDigit = true;
 
@@ -159,9 +117,7 @@ public class Solution {
 			}
 			while (number != 0) {
 				int digit = number % 10;
-				if (digit % 2 == 0) {
-					isEvenDigit = true;
-				} else {
+				if (digit % 2 != 0) {
 					isEvenDigit = false;
 					break;
 				}
@@ -173,7 +129,7 @@ public class Solution {
 		}
 		System.out.println("Quantity of numbers with even digits: " + quantityOfNumbersWithEvenDigitsOnly);
 	}
-	public static void findQuantityOfNumbersWithEqualAmountOfEvenAndOddDigits(int[] numbers) {
+	public void findQuantityOfNumbersWithEqualAmountOfEvenAndOddDigits(int[] numbers) {
 		int quantityOfNumbersWithEqualAmountOfEvenAndOddDigits = 0;
 
 		for (int number : numbers) {
@@ -196,7 +152,7 @@ public class Solution {
 				quantityOfNumbersWithEqualAmountOfEvenAndOddDigits);
 	}
 
-	public static void findNumberWhichDigitsAreArrangedInStrictlyAscendingOrder(int[] numbers) {
+	public void findNumberWhichDigitsAreArrangedInStrictlyAscendingOrder(int[] numbers) {
 		for (int number : numbers) {
 			boolean isSearchedNumber = true;
 			int previousDigit = -1;
@@ -223,21 +179,32 @@ public class Solution {
 		}
 	}
 
-	public static void findNumberWithDifferentDigits(int[] numbers) {
+	public void findNumberWithOnlyDifferentDigits(int[] numbers) {
 		for (int number : numbers) {
-			Stack<Integer> numberDigits = new Stack<>();
-			int numberCopy = number;
-			while (numberCopy != 0) {
-				int digit = numberCopy % 10;
-				numberDigits.push(digit);
-				numberCopy /= 10;
-			}
-			int digitsCounter = calculateNumberLength(number);
-			int differentDigitsCounter = findAmountOfDifferentDigits(numberDigits);
-			if (differentDigitsCounter == digitsCounter) {
+			if (hasOnlyDifferentDigits(number)) {
 				System.out.println("Number with different digits: " + number);
 				break;
 			}
 		}
+	}
+
+	private boolean hasOnlyDifferentDigits(int number) {
+		int[] numbersOfOccurrencesOfEachDigit = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		int numberCopy = number;
+
+		if (number == 0) {
+			return true;
+		}
+		while(numberCopy != 0) {
+			int digit = numberCopy % 10;
+			numbersOfOccurrencesOfEachDigit[digit]++;
+			numberCopy /= 10;
+		}
+		for (int numberOfOccurrences : numbersOfOccurrencesOfEachDigit) {
+			if (numberOfOccurrences != 0 && numberOfOccurrences != 1) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
