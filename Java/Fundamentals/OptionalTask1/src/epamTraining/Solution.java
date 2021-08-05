@@ -154,25 +154,27 @@ public class Solution {
 
 	public void findNumberWhichDigitsAreArrangedInStrictlyAscendingOrder(int[] numbers) {
 		for (int number : numbers) {
-			boolean isSearchedNumber = true;
-			int previousDigit = -1;
+			boolean numberIsFound = true;
 			int numberCopy = number;
+			int[] digits = new int[calculateNumberLength(number)];
+			int i = 0;
 			while (numberCopy != 0) {
-				boolean currentDigitIsGreaterThanPrevious = true;
-				int currentDigit = numberCopy % 10;
+				int digit = numberCopy % 10;
+				digits[i] = digit;
 				numberCopy /= 10;
-				if (previousDigit != -1) {
-					currentDigitIsGreaterThanPrevious = currentDigit < previousDigit;
-				}
-
-				if (currentDigitIsGreaterThanPrevious) {
-					previousDigit = currentDigit;
+				i++;
+			}
+			int previousDigit = digits[0];
+			for (int j = 1; j < digits.length; j++) {
+				if (digits[j] < previousDigit) {
+					previousDigit = digits[j];
+					numberIsFound = true;
 				} else {
-					isSearchedNumber = false;
+					numberIsFound = false;
 					break;
 				}
 			}
-			if (isSearchedNumber) {
+			if (numberIsFound) {
 				System.out.println("The number is: " + number);
 				break;
 			}
