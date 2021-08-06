@@ -3,19 +3,30 @@ package epamTraining;
 import java.util.*;
 
 public class Solution {
-	static Random rand = new Random();
+	private int[][] matrix;
 
-	public static int[][] createSquareMatrixOfRandomNumbers(final int SIZE) {
-		int[][] matrix = new int[SIZE][SIZE];
-		for (int row = 0; row < matrix.length; row++) {
-			for (int column = 0; column < matrix[row].length; column++) {
-				matrix[row][column] = rand.nextInt(200) - 100;			//random numbers from -100 to 100
-			}
-		}
+	public Solution(int[][] matrix) {
+		this.matrix = matrix;
+	}
+
+	public int[][] getMatrix() {
 		return matrix;
 	}
 
-	public static void displayMatrix(int[][] matrix) {
+	public void setMatrix(int[][] matrix) {
+		this.matrix = matrix;
+	}
+
+	public void setMatrixWithRandomValues(int bound) {
+		Random random = new Random();
+		for (int row = 0; row < matrix.length; row++) {
+			for (int column = 0; column < matrix[row].length; column++) {
+				matrix[row][column] = random.nextInt(bound * 2) - bound;
+			}
+		}
+	}
+
+	public void displayMatrix() {
 		System.out.println("\nMatrix:");
 		for (int row = 0; row < matrix.length; row++) {
 			for (int column = 0; column < matrix[row].length; column++) {
@@ -25,10 +36,9 @@ public class Solution {
 		}
 	}
 
-	public static void sortMatrixRowsInAscendingOrderOfElementsInParticularColumn(int[][] matrix,
-																				  final int COLUMN) {
-		if (COLUMN >= matrix.length) {
-			throw new ArrayIndexOutOfBoundsException("Index out of bounds");
+	public void sortMatrixRowsInAscendingOrderOfElementsInParticularColumn(final int COLUMN) {
+		if (COLUMN >= matrix.length || COLUMN < 0) {
+			throw new IllegalArgumentException("Index " + COLUMN + "is out of bounds");
 		}
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = i + 1; j < matrix.length; j++) {
@@ -39,49 +49,40 @@ public class Solution {
 				}
 			}
 		}
-		displayMatrix(matrix);
+		displayMatrix();
 	}
 
-	private static int[] transformSquareMatrixIntoOneDimensionalArray(int[][] matrix) {
-		int[] array = new int[matrix.length * matrix.length];
+	public void displayLongestSequenceOfAscendingMatrixElements() {
+		Deque<Integer> sequence = new ArrayDeque<>();
+		Queue<Integer> maxSequence = new ArrayDeque<>();
 
 		for (int row = 0; row < matrix.length; row++) {
 			for (int column = 0; column < matrix[row].length; column++) {
-				int index = row * matrix[row].length + column;
-				array[index] = matrix[row][column];
-			}
-		}
-		return array;
-	}
-
-	public static void displayLongestSequenceOfAscendingMatrixElements(int[][] matrix) {
-		int[] matrixElements = transformSquareMatrixIntoOneDimensionalArray(matrix);
-		ArrayList<Integer> maxSequence = new ArrayList<>();
-		ArrayList<Integer> currentSequence = new ArrayList<>();
-
-		for (int index = 1; index < matrixElements.length; index++) {
-			if (currentSequence.isEmpty()) {
-				currentSequence.add(matrixElements[index - 1]);
-			}
-
-			if (matrixElements[index] > matrixElements[index - 1]) {
-				currentSequence.add(matrixElements[index]);
-			} else {
-
-				if (currentSequence.size() > maxSequence.size()) {
-					maxSequence = (ArrayList<Integer>) currentSequence.clone();
+				if (sequence.isEmpty()) {
+					sequence.addLast(matrix[row][column]);
+				} else if (matrix[row][column] > sequence.peekLast()){
+					sequence.addLast(matrix[row][column]);
+				} else {
+					if (sequence.size() > maxSequence.size()) {
+						maxSequence.clear();
+						maxSequence.addAll(sequence);
+					}
+					sequence.clear();
+					sequence.addLast(matrix[row][column]);
 				}
-				currentSequence.clear();
 			}
 		}
-
-		for (var element : maxSequence) {
+		if (sequence.size() > maxSequence.size()) {
+			maxSequence.clear();
+			maxSequence.addAll(sequence);
+		}
+		System.out.print("\nMax sequence: ");
+		for (int element : maxSequence) {
 			System.out.print(element + " ");
 		}
-		System.out.println();
 	}
 
-	public static void findSumOfMatrixElementsBetweenFirstTwoPositiveElements(int[][] matrix) {
+	public void findSumOfMatrixElementsBetweenFirstTwoPositiveElements() {
 		int sum = 0;
 		boolean firstBoundIsFound = false;
 		boolean secondBoundIsFound = false;
@@ -95,10 +96,8 @@ public class Solution {
 						firstBoundIsFound = true;
 					} else if (firstBoundIsFound && (matrix[row][column] > 0)) {
 						secondBoundIsFound = true;
-					} else if ((firstBoundIsFound) && (!secondBoundIsFound)){
+					} else if (firstBoundIsFound){
 						sum += matrix[row][column];
-					} else {
-						continue;
 					}
 				}
 			}
@@ -109,20 +108,27 @@ public class Solution {
 		}
 	}
 
-	public static void deleteRowAndColumnWhichContainMaxElementInMatrix(int[][] matrix) {
-		int maxElement = Integer.MIN_VALUE;
+	private int[][] convertListIntoSquareMatrix(List<Integer> list, int matrixOrder) {
+		int[][] matrix = new int[matrixOrder][matrixOrder];
+
+		list.removeIf(Objects::isNull);
+		for (int row = 0; row < matrix.length; row++) {
+			for (int column = 0; column < matrix[row].length; column++) {
+				matrix[row][column] = list.remove(0);
+			}
+		}
+		return matrix;
+	}
+
+	public void deleteRowAndColumnWhichContainMaxElementInMatrix() {
+		int maxElement = matrix[0][0];
 		int maxElementRow = 0;
 		int maxElementColumn = 0;
-		int[] initialMatrixElements = transformSquareMatrixIntoOneDimensionalArray(matrix);
-		int newMatrixSize = matrix.length - 1;
+		int newMatrixOrder = matrix.length - 1;
 		ArrayList<Integer> newMatrix = new ArrayList<>();
 
-		for (int element : initialMatrixElements) {        							/*copy elements*/
-			newMatrix.add(element);
-		}
-
-		for (int row = 0; row < matrix.length; row++) {								/*find max*/
-			for (int column = 0; column < matrix[row].length; column++) {
+		for (int row = 0; row < matrix.length; row++) {
+			for (int column = 1; column < matrix[row].length; column++) {
 				if (matrix[row][column] > maxElement) {
 					maxElement = matrix[row][column];
 					maxElementRow = row;
@@ -131,22 +137,16 @@ public class Solution {
 			}
 		}
 		System.out.println("\nMax element is: " + maxElement);
-
 		for (int row = 0; row < matrix.length; row++) {
 			for (int column = 0; column < matrix[row].length; column++) {
-				int index = row * matrix[row].length + column;
-				if ((row == maxElementRow) || (column == maxElementColumn)) {
-					newMatrix.set(index, null);
+				if ((row != maxElementRow) && (column != maxElementColumn)) {
+					newMatrix.add(matrix[row][column]);
+				} else {
+					newMatrix.add(null);
 				}
 			}
 		}
-		newMatrix.removeIf(Objects::isNull);
-		for (int row = 0; row < newMatrixSize; row++) {
-			for (int column = 0; column < newMatrixSize; column++) {
-				int index = row * newMatrixSize + column;
-				System.out.print(newMatrix.get(index) + "\t");
-			}
-			System.out.println();
-		}
+		matrix = convertListIntoSquareMatrix(newMatrix, newMatrixOrder);
+		displayMatrix();
 	}
 }
