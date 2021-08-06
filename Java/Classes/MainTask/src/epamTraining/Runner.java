@@ -2,32 +2,32 @@ package epamTraining;
 
 import java.util.Scanner;
 
-public class Main {
+public class Runner {
 	static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		int numberOfCars = enterNumberOfCars();
 		Car[] carsArray = enterCarsArray(numberOfCars);
-		Task mainTask = new Task(carsArray);
+		Garage garage = new Garage(carsArray);
 
 		switch (menu()) {
 			case 'a':
 				System.out.print("Enter car brand: ");
 				clearInputStream();
-				mainTask.displayCarsOfGivenBrand(scanner.nextLine());
+				garage.displayCarsOfGivenBrand(scanner.nextLine());
 				break;
 
 			case 'b':
 				System.out.println("Enter car brand and exploitation period (in years):");
 				clearInputStream();
-				mainTask.displayCarsOfGivenBrandAndExploitationPeriod(scanner.nextLine(),
+				garage.displayCarsOfGivenBrandAndExploitationPeriod(scanner.nextLine(),
 																	  scanner.nextInt());
 				break;
 
 			case 'c':
 				System.out.println("Enter release year and price:");
 				clearInputStream();
-				mainTask.displayCarsOfGivenReleaseYearAndHigherThanGivenPrice(scanner.nextInt(),
+				garage.displayCarsOfGivenReleaseYearAndHigherThanGivenPrice(scanner.nextInt(),
 																			  scanner.nextInt());
 				break;
 

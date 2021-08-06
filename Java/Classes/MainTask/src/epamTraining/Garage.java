@@ -3,18 +3,18 @@ package epamTraining;
 import java.time.Year;
 import java.util.ArrayList;
 
-public class Task {
-	private Car[] carsArray;
+public class Garage {
+	private Car[] cars;
 
-	public Task(Car[] carsArray) {
-		this.carsArray = carsArray;
+	public Garage(Car[] cars) {
+		this.cars = cars;
 	}
 
 	public void displayCarsOfGivenBrand(String brand) {
 		ArrayList<Car> searchedCars = new ArrayList<>();
 		brand = brand.toLowerCase();
 
-		for (Car car : carsArray) {
+		for (Car car : cars) {
 			if (car.getBrand().toLowerCase().compareTo(brand) == 0) {
 				searchedCars.add(car);
 			}
@@ -30,7 +30,7 @@ public class Task {
 		ArrayList<Car> searchedCars = new ArrayList<>();
 		brand = brand.toLowerCase();
 
-		for (Car car : carsArray) {
+		for (Car car : cars) {
 			int exploitationPeriod = Year.now().getValue() - car.getReleaseYear();
 			if ((car.getBrand().toLowerCase().compareTo(brand) == 0)
 					&& (exploitationPeriod == givenExploitationPeriod)) {
@@ -47,7 +47,7 @@ public class Task {
 	public void displayCarsOfGivenReleaseYearAndHigherThanGivenPrice(int releaseYear, int price) {
 		ArrayList<Car> searchedCars = new ArrayList<>();
 
-		for (Car car : carsArray) {
+		for (Car car : cars) {
 			if ((car.getReleaseYear() == releaseYear)
 					&& (car.getPrice() > price)) {
 				searchedCars.add(car);
