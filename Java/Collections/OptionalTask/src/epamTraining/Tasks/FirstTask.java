@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class FirstTask {
 	private File file;
 
-
 	public FirstTask(File file) {
 		this.file = file;
 	}

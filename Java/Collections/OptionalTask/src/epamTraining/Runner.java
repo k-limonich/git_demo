@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Runner {
+
 	public static void main(String[] args) {
 		switch (menu()) {
 			case 1:
