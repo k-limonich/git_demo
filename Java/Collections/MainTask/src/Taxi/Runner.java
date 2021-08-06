@@ -17,11 +17,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Runner {
-	static List<? extends Car> cars;
+	static List<Car> cars = new ArrayList<>();
 
-	public static List<? extends Car> getDataFromFile()
+	public static void getDataFromFile()
 			throws FileNotFoundException, InvalidTaxiRateException, InputMismatchException {
-		List<Car> cars = new ArrayList<>();
 		File file = new File("C:\\temp\\git_demo\\Java\\Collections\\MainTask\\data.txt");
 		Scanner scanner = new Scanner(file);
 
@@ -53,12 +52,11 @@ public class Runner {
 					throw new InvalidTaxiRateException("Invalid taxi rate: " + rate);
 			}
 		}
-		return cars;
 	}
 
 	public static void main(String[] args) {
 		try {
-			cars = getDataFromFile();
+			getDataFromFile();
 			Garage taxiGarage = new Garage(cars);
 
 			switch (menu()) {

@@ -4,7 +4,7 @@ import Taxi.Brands.ComfortRateBrand;
 
 import java.util.Objects;
 
-public class ComfortRateCar extends Car{
+public class ComfortRateCar extends Car {
 	ComfortRateBrand brand;
 
 	public ComfortRateCar(int value, double gasConsumption, int mileage,

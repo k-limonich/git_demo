@@ -4,7 +4,7 @@ import Taxi.Brands.BudgetRateBrand;
 
 import java.util.Objects;
 
-public class BudgetRateCar extends Car{
+public class BudgetRateCar extends Car {
 	private BudgetRateBrand brand;
 
 	public BudgetRateCar(int value, double gasConsumption, int mileage,
