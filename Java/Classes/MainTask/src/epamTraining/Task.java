@@ -1,7 +1,6 @@
 package epamTraining;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.time.Year;
 import java.util.ArrayList;
 
 public class Task {
@@ -11,63 +10,51 @@ public class Task {
 		this.carsArray = carsArray;
 	}
 
-	private void printCarsArray(Car[] carsArray) {
-		for (var car : carsArray) {
-			System.out.println(car);
-		}
-	}
-
-	public void findCarsOfGivenBrand(String brand) {
+	public void displayCarsOfGivenBrand(String brand) {
 		ArrayList<Car> searchedCars = new ArrayList<>();
 		brand = brand.toLowerCase();
-		boolean carsAreFound = false;
 
-		for (var car : carsArray) {
+		for (Car car : carsArray) {
 			if (car.getBrand().toLowerCase().compareTo(brand) == 0) {
 				searchedCars.add(car);
-				carsAreFound = true;
 			}
 		}
-		if (carsAreFound) {
-			printCarsArray(searchedCars.toArray(Car[]::new));
+		if (!searchedCars.isEmpty()) {
+			System.out.println(searchedCars.toString().replace(",", "\n"));
 		} else {
 			System.out.println("\nCars of given brand are not found");
 		}
 	}
 
-	public void findCarsOfGivenBrandAndReleaseYear(String brand, int releaseYear) {
+	public void displayCarsOfGivenBrandAndExploitationPeriod(String brand, int givenExploitationPeriod) {
 		ArrayList<Car> searchedCars = new ArrayList<>();
 		brand = brand.toLowerCase();
-		boolean carsAreFound = false;
 
-		for (var car : carsArray) {
+		for (Car car : carsArray) {
+			int exploitationPeriod = Year.now().getValue() - car.getReleaseYear();
 			if ((car.getBrand().toLowerCase().compareTo(brand) == 0)
-					&& (car.getReleaseYear() == releaseYear)) {
+					&& (exploitationPeriod == givenExploitationPeriod)) {
 				searchedCars.add(car);
-				carsAreFound = true;
 			}
 		}
-		if (carsAreFound) {
-			printCarsArray(searchedCars.toArray(Car[]::new));
+		if (!searchedCars.isEmpty()) {
+			System.out.println(searchedCars.toString().replace(",", "\n"));
 		} else {
 			System.out.println("\nCars of given brand and release year are not found");
 		}
 	}
 
-	public void findCarsOfGivenReleaseYearAndHigherThanGivenPrice(int releaseYear, double price) {
+	public void displayCarsOfGivenReleaseYearAndHigherThanGivenPrice(int releaseYear, int price) {
 		ArrayList<Car> searchedCars = new ArrayList<>();
-		price = BigDecimal.valueOf(price).setScale(2, RoundingMode.HALF_UP).doubleValue();
-		boolean carsAreFound = false;
 
-		for (var car : carsArray) {
+		for (Car car : carsArray) {
 			if ((car.getReleaseYear() == releaseYear)
 					&& (car.getPrice() > price)) {
 				searchedCars.add(car);
-				carsAreFound = true;
 			}
 		}
-		if (carsAreFound) {
-			printCarsArray(searchedCars.toArray(Car[]::new));
+		if (!searchedCars.isEmpty()) {
+			System.out.println(searchedCars.toString().replace(",", "\n"));
 		} else {
 			System.out.println("\nCars of given brand and higher price than given  are not found");
 		}

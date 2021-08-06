@@ -1,28 +1,25 @@
 package epamTraining;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 public class Car {
 	private String vin;				//Vehicle Identification Number (VIN)
 	private String brand;
 	private String model;
 	private int releaseYear;
 	private String color;
-	private double price;
+	private int price;
 	private String licencePlate;
 
 	public Car() {
 	}
 
 	public Car(String vin, String brand, String model, int releaseYear,
-			   String color, double price, String licencePlate) {
+			   String color, int price, String licencePlate) {
 		this.vin = vin;
 		this.brand = brand;
 		this.model = model;
 		this.releaseYear = releaseYear;
 		this.color = color;
-		this.price = BigDecimal.valueOf(price).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		this.price = price;
 		this.licencePlate = licencePlate;
 	}
 
@@ -66,11 +63,11 @@ public class Car {
 		this.color = color;
 	}
 
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -84,14 +81,14 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "Car [" +
+		return "(" +
 				"VIN: " + vin +
 				"; Brand: " + brand +
 				"; Model: " + model +
 				"; Release year: " + releaseYear +
 				"; Color: " + color +
-				"; Price: " + String.format("%.2f", price) +
+				"; Price: " + price +
 				"; Licence plate: " + licencePlate +
-				']';
+				')';
 	}
 }

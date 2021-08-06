@@ -3,7 +3,7 @@ package epamTraining;
 import java.util.Scanner;
 
 public class Main {
-	static Scanner input = new Scanner(System.in);
+	static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		int numberOfCars = enterNumberOfCars();
@@ -14,30 +14,31 @@ public class Main {
 			case 'a':
 				System.out.print("Enter car brand: ");
 				clearInputStream();
-				mainTask.findCarsOfGivenBrand(input.nextLine());
+				mainTask.displayCarsOfGivenBrand(scanner.nextLine());
 				break;
 
 			case 'b':
-				System.out.println("Enter car brand and release year:");
+				System.out.println("Enter car brand and exploitation period (in years):");
 				clearInputStream();
-				mainTask.findCarsOfGivenBrandAndReleaseYear(input.nextLine(), input.nextInt());
+				mainTask.displayCarsOfGivenBrandAndExploitationPeriod(scanner.nextLine(),
+																	  scanner.nextInt());
 				break;
 
 			case 'c':
 				System.out.println("Enter release year and price:");
 				clearInputStream();
-				mainTask.findCarsOfGivenReleaseYearAndHigherThanGivenPrice(input.nextInt(),
-																			input.nextDouble());
+				mainTask.displayCarsOfGivenReleaseYearAndHigherThanGivenPrice(scanner.nextInt(),
+																			  scanner.nextInt());
 				break;
 
 			default:
-				throw new IllegalArgumentException("Invalid option. Try again");
+				throw new IllegalArgumentException("Invalid option");
 		}
 	}
 
 	public static int enterNumberOfCars() {
 		System.out.print("Enter number of cars: ");
-		return input.nextInt();
+		return scanner.nextInt();
 	}
 
 	public static Car[] enterCarsArray(int numberOfCars) {
@@ -48,20 +49,20 @@ public class Main {
 			System.out.println("\nCar No." + (index + 1));
 			carsArray[index] = new Car();
 			System.out.print("VIN: ");
-			carsArray[index].setVin(input.next());
+			carsArray[index].setVin(scanner.next());
 			System.out.print("Brand: ");
 			clearInputStream();
-			carsArray[index].setBrand(input.nextLine());
+			carsArray[index].setBrand(scanner.nextLine());
 			System.out.print("Model: ");
-			carsArray[index].setModel(input.nextLine());
+			carsArray[index].setModel(scanner.nextLine());
 			System.out.print("Release year: ");
-			carsArray[index].setReleaseYear(input.nextInt());
+			carsArray[index].setReleaseYear(scanner.nextInt());
 			System.out.print("Color: ");
-			carsArray[index].setColor(input.next());
+			carsArray[index].setColor(scanner.next());
 			System.out.print("Price: ");
-			carsArray[index].setPrice(input.nextDouble());
+			carsArray[index].setPrice(scanner.nextInt());
 			System.out.print("Licence plate: ");
-			carsArray[index].setLicencePlate(input.next());
+			carsArray[index].setLicencePlate(scanner.next());
 		}
 		return carsArray;
 	}
@@ -69,13 +70,13 @@ public class Main {
 	public static char menu() {
 		System.out.println("Print options");
 		System.out.println("a) Cars of given brand");
-		System.out.println("b) Cars of given brand and release year");
+		System.out.println("b) Cars of given brand and exploitation period");
 		System.out.println("c) Cars of given release year and higher than given price");
 		System.out.print("?");
-		return (input.next().charAt(0));
+		return (scanner.next().charAt(0));
 	}
 
 	public static void clearInputStream() {
-		input.nextLine();
+		scanner.nextLine();
 	}
 }
