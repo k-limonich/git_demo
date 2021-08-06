@@ -72,7 +72,7 @@ public class Runner {
 				case 3:
 					Scanner scanner = new Scanner(System.in);
 					System.out.println("Enter range bounds:");
-					double speedFrom = scanner.nextDouble();;
+					double speedFrom = scanner.nextDouble();
 					double speedTo = scanner.nextDouble();
 					System.out.println(taxiGarage.getCarsInAverageSpeedRange(speedFrom, speedTo)
 										.toString().replace(',', '\n'));
