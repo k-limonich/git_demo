@@ -1,4 +1,4 @@
-package epamTraining;
+package com.epam.training;
 
 import java.util.*;
 
@@ -210,3 +210,4 @@ public class Solution {
 		return true;
 	}
 }
+

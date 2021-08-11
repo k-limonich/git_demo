@@ -1,4 +1,4 @@
-package epamTraining;
+package com.epam.training;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class Optional1 {
 			System.out.print("Enter number No." + (i + 1) + ": ");
 			numbers[i] = scanner.nextInt();
 		}
-		switch(menu()) {
+		switch (menu()) {
 			case 1:
 				solution.findShortestAndLongestNumber(numbers);
 				break;
@@ -48,6 +48,7 @@ public class Optional1 {
 				throw new IllegalArgumentException("Invalid option");
 		}
 	}
+
 	static int menu() {
 		System.out.println("Choose an option:");
 		System.out.println("1 - Find longest and shortest numbers");
