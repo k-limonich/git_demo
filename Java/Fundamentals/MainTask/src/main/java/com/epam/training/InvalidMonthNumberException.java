@@ -1,4 +1,4 @@
-package epamTraining;
+package com.epam.training;
 
 public class InvalidMonthNumberException extends RuntimeException {
 
