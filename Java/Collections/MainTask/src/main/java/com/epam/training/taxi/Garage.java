@@ -3,14 +3,13 @@ package com.epam.training.taxi;
 import com.epam.training.taxi.cars.Car;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
 public class Garage {
-	private List<? extends Car> cars;
+	private List<Car> cars;
 
-	public Garage(List<? extends Car> cars) {
+	public Garage(List<Car> cars) {
 		this.cars = cars;
 	}
 
@@ -24,7 +23,7 @@ public class Garage {
 	}
 
 	public Garage sortByGasConsumption() {
-		cars.sort((Comparator<Car>) (o1, o2) -> {
+		cars.sort((o1, o2) -> {
 			double gasConsumptionDelta = o1.getGasConsumption() - o2.getGasConsumption();
 			if (gasConsumptionDelta > 0) { return 1; }
 			if (gasConsumptionDelta < 0) { return -1; }
