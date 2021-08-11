@@ -30,7 +30,7 @@ public class Runner {
 
 			case 3:
 				ThirdTask thirdTask = new ThirdTask();
-				thirdTask.createListOfFilesInDirectoryAndItsSubdirectories(new File("directory"));
+				thirdTask.createListOfFilesInDirectoryAndItsSubdirectories(new File("taskFiles\\directory"));
 				thirdTask.printListOfFilesInDirectoryAndItsSubdirectories();
 				break;
 
