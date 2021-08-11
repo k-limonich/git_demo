@@ -1,4 +1,4 @@
-package epamTraining;
+package com.epam.training;
 
 import java.util.*;
 
@@ -6,14 +6,6 @@ public class Solution {
 	private int[][] matrix;
 
 	public Solution(int[][] matrix) {
-		this.matrix = matrix;
-	}
-
-	public int[][] getMatrix() {
-		return matrix;
-	}
-
-	public void setMatrix(int[][] matrix) {
 		this.matrix = matrix;
 	}
 
