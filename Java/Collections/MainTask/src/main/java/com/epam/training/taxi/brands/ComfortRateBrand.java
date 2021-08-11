@@ -1,4 +1,4 @@
-package Taxi.Brands;
+package com.epam.training.taxi.brands;
 
 public enum ComfortRateBrand {
 	TOYOTA("Camry"), KIA("Optima"), HYUNDAI("Sonata");

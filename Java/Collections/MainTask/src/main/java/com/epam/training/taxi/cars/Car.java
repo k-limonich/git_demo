@@ -1,4 +1,4 @@
-package Taxi.Cars;
+package com.epam.training.taxi.cars;
 
 import java.util.Objects;
 
@@ -18,19 +18,9 @@ public abstract class Car {
 
 	public int getValue() { return value; }
 
-	public void setValue(int value) { this.value = value; }
-
 	public double getGasConsumption() { return gasConsumption; }
 
-	public void setGasConsumption(double gasConsumption) { this.gasConsumption = gasConsumption; }
-
-	public int getMileage() { return mileage; }
-
-	public void setMileage(int mileage) { this.mileage = mileage; }
-
 	public double getAverageSpeed() { return averageSpeed; }
-
-	public void setAverageSpeed(double averageSpeed) { this.averageSpeed = averageSpeed; }
 
 	@Override
 	public String toString() {

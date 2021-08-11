@@ -1,13 +1,13 @@
-package Taxi;
+package com.epam.training.taxi;
 
-import Taxi.Brands.BudgetRateBrand;
-import Taxi.Brands.BusinessRateBrand;
-import Taxi.Brands.ComfortRateBrand;
-import Taxi.Cars.BudgetRateCar;
-import Taxi.Cars.BusinessRateCar;
-import Taxi.Cars.Car;
-import Taxi.Cars.ComfortRateCar;
-import Taxi.Exceptions.InvalidTaxiRateException;
+import com.epam.training.taxi.brands.BudgetRateBrand;
+import com.epam.training.taxi.brands.BusinessRateBrand;
+import com.epam.training.taxi.brands.ComfortRateBrand;
+import com.epam.training.taxi.cars.BudgetRateCar;
+import com.epam.training.taxi.cars.BusinessRateCar;
+import com.epam.training.taxi.cars.Car;
+import com.epam.training.taxi.cars.ComfortRateCar;
+import com.epam.training.taxi.exceptions.InvalidTaxiRateException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ public class Runner {
 
 	public static void getDataFromFile()
 			throws FileNotFoundException, InvalidTaxiRateException, InputMismatchException {
-		File file = new File("C:\\temp\\git_demo\\Java\\Collections\\MainTask\\data.txt");
+		File file = new File("data.txt");
 		Scanner scanner = new Scanner(file);
 
 		while (scanner.hasNext()) {

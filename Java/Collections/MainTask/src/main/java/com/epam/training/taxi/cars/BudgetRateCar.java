@@ -1,6 +1,6 @@
-package Taxi.Cars;
+package com.epam.training.taxi.cars;
 
-import Taxi.Brands.BudgetRateBrand;
+import com.epam.training.taxi.brands.BudgetRateBrand;
 
 import java.util.Objects;
 
@@ -12,8 +12,6 @@ public class BudgetRateCar extends Car {
 		super(value, gasConsumption, mileage, averageSpeed);
 		this.brand = brand;
 	}
-
-	public BudgetRateBrand getBrand() { return brand; }
 
 	@Override
 	public String toString() {

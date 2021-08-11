@@ -1,4 +1,4 @@
-package Taxi.Exceptions;
+package com.epam.training.taxi.exceptions;
 
 public class InvalidTaxiRateException extends IllegalArgumentException {
 

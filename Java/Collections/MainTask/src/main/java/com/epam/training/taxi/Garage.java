@@ -5,6 +5,7 @@ import com.epam.training.taxi.cars.Car;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class Garage {
 	private List<? extends Car> cars;
@@ -23,19 +24,16 @@ public class Garage {
 	}
 
 	public Garage sortByGasConsumption() {
-		cars.sort(new Comparator<Car>() {
-			@Override
-			public int compare(Car o1, Car o2) {
-				double gasConsumptionDelta = o1.getGasConsumption() - o2.getGasConsumption();
-				if (gasConsumptionDelta > 0) { return 1; }
-				if (gasConsumptionDelta < 0) { return -1; }
-				return 0;
-			}
+		cars.sort((Comparator<Car>) (o1, o2) -> {
+			double gasConsumptionDelta = o1.getGasConsumption() - o2.getGasConsumption();
+			if (gasConsumptionDelta > 0) { return 1; }
+			if (gasConsumptionDelta < 0) { return -1; }
+			return 0;
 		});
 		return this;
 	}
 
-	public List<? extends Car> getCarsInAverageSpeedRange(double speedFrom, double speedTo) {
+	public List<Car> getCarsInAverageSpeedRange(double speedFrom, double speedTo) {
 		List<Car> carsInAverageSpeedRange = new ArrayList<>();
 
 		for (Car car : cars) {
@@ -49,5 +47,18 @@ public class Garage {
 	@Override
 	public String toString() {
 		return cars.toString().replace(",", "\n");
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Garage garage = (Garage) o;
+		return Objects.equals(cars, garage.cars);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cars);
 	}
 }
