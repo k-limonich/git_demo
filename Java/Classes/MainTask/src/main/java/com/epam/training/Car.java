@@ -1,4 +1,4 @@
-package epamTraining;
+package com.epam.training;
 
 public class Car {
 	private String vin;				//Vehicle Identification Number (VIN)
@@ -10,21 +10,6 @@ public class Car {
 	private String licencePlate;
 
 	public Car() {
-	}
-
-	public Car(String vin, String brand, String model, int releaseYear,
-			   String color, int price, String licencePlate) {
-		this.vin = vin;
-		this.brand = brand;
-		this.model = model;
-		this.releaseYear = releaseYear;
-		this.color = color;
-		this.price = price;
-		this.licencePlate = licencePlate;
-	}
-
-	public String getVin() {
-		return vin;
 	}
 
 	public void setVin(String vin) {
@@ -39,10 +24,6 @@ public class Car {
 		this.brand = brand;
 	}
 
-	public String getModel() {
-		return model;
-	}
-
 	public void setModel(String model) {
 		this.model = model;
 	}
@@ -55,10 +36,6 @@ public class Car {
 		this.releaseYear = releaseYear;
 	}
 
-	public String getColor() {
-		return color;
-	}
-
 	public void setColor(String color) {
 		this.color = color;
 	}
@@ -69,10 +46,6 @@ public class Car {
 
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	public String getLicencePlate() {
-		return licencePlate;
 	}
 
 	public void setLicencePlate(String licencePlate) {

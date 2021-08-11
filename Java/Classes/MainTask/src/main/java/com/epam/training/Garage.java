@@ -1,4 +1,4 @@
-package epamTraining;
+package com.epam.training;
 
 import java.time.Year;
 import java.util.ArrayList;
