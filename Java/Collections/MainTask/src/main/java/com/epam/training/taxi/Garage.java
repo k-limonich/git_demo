@@ -1,9 +1,6 @@
-package Taxi;
+package com.epam.training.taxi;
 
-import Taxi.Cars.BudgetRateCar;
-import Taxi.Cars.BusinessRateCar;
-import Taxi.Cars.Car;
-import Taxi.Cars.ComfortRateCar;
+import com.epam.training.taxi.cars.Car;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,41 +11,6 @@ public class Garage {
 
 	public Garage(List<? extends Car> cars) {
 		this.cars = cars;
-	}
-
-	public List<? extends Car> getCars() { return cars; }
-
-	public List<BudgetRateCar> getBudgetRateCars() {
-		List<BudgetRateCar> budgetRateCars = new ArrayList<>();
-
-		for (Car car : cars) {
-			if (car instanceof BudgetRateCar) {
-				budgetRateCars.add((BudgetRateCar) car);
-			}
-		}
-		return budgetRateCars;
-	}
-
-	public List<ComfortRateCar> getComfortRateCars() {
-		List<ComfortRateCar> comfortRateCars = new ArrayList<>();
-
-		for (Car car : cars) {
-			if (car instanceof ComfortRateCar) {
-				comfortRateCars.add((ComfortRateCar) car);
-			}
-		}
-		return comfortRateCars;
-	}
-
-	public List<BusinessRateCar> getBusinessRateCars() {
-		List<BusinessRateCar> businessRateCars = new ArrayList<>();
-
-		for (Car car : cars) {
-			if (car instanceof BusinessRateCar) {
-				businessRateCars.add((BusinessRateCar) car);
-			}
-		}
-		return businessRateCars;
 	}
 
 	public int calculateValueOfCars() {
