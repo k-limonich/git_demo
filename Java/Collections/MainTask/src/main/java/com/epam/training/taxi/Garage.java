@@ -13,11 +13,11 @@ public class Garage {
 		this.cars = cars;
 	}
 
-	public int calculateValueOfCars() {
+	public int calculateCostOfCars() {
 		int valueOfCars = 0;
 
 		for (Car car : cars) {
-			valueOfCars += car.getValue();
+			valueOfCars += car.getCost();
 		}
 		return valueOfCars;
 	}

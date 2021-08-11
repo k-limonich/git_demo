@@ -3,20 +3,20 @@ package com.epam.training.taxi.cars;
 import java.util.Objects;
 
 public abstract class Car {
-	private int value;
+	private int cost;
 	private double gasConsumption;
 	private int mileage;
 	private double averageSpeed;
 
-	public Car(int value, double gasConsumption,
+	public Car(int cost, double gasConsumption,
 			   int mileage, double averageSpeed) {
-		this.value = value;
+		this.cost = cost;
 		this.gasConsumption = gasConsumption;
 		this.mileage = mileage;
 		this.averageSpeed = averageSpeed;
 	}
 
-	public int getValue() { return value; }
+	public int getCost() { return cost; }
 
 	public double getGasConsumption() { return gasConsumption; }
 
@@ -24,7 +24,7 @@ public abstract class Car {
 
 	@Override
 	public String toString() {
-		return  "[Value: " + value + " " +
+		return  "[Cost: " + cost + " " +
 				"| Gas consumption: " + gasConsumption + " " +
 				"| Mileage: " + mileage + " " +
 				"| Average speed: " + averageSpeed +
@@ -36,7 +36,7 @@ public abstract class Car {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Car car = (Car) o;
-		return ((Double.compare(car.value, value) == 0) &&
+		return ((Double.compare(car.cost, cost) == 0) &&
 				(Double.compare(car.gasConsumption, gasConsumption) == 0) &&
 				(mileage == car.mileage) &&
 				(averageSpeed == car.averageSpeed));
@@ -44,6 +44,6 @@ public abstract class Car {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(value, gasConsumption, mileage, averageSpeed);
+		return Objects.hash(cost, gasConsumption, mileage, averageSpeed);
 	}
 }

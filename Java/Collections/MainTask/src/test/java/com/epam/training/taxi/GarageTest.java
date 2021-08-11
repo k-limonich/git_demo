@@ -31,8 +31,8 @@ public class GarageTest {
 	}
 
 	@Test
-	void testCalculateValueOfCars() {
-		assertEquals(72_000, garage.calculateValueOfCars());
+	void testCalculateCostOfCars() {
+		assertEquals(72_000, garage.calculateCostOfCars());
 	}
 
 	@Test

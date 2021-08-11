@@ -7,9 +7,9 @@ import java.util.Objects;
 public class BudgetRateCar extends Car {
 	private BudgetRateBrand brand;
 
-	public BudgetRateCar(int value, double gasConsumption, int mileage,
+	public BudgetRateCar(int cost, double gasConsumption, int mileage,
 						 double averageSpeed, BudgetRateBrand brand) {
-		super(value, gasConsumption, mileage, averageSpeed);
+		super(cost, gasConsumption, mileage, averageSpeed);
 		this.brand = brand;
 	}
 

@@ -7,9 +7,9 @@ import java.util.Objects;
 public class ComfortRateCar extends Car {
 	ComfortRateBrand brand;
 
-	public ComfortRateCar(int value, double gasConsumption, int mileage,
+	public ComfortRateCar(int cost, double gasConsumption, int mileage,
 						  double averageSpeed, ComfortRateBrand brand) {
-		super(value, gasConsumption, mileage, averageSpeed);
+		super(cost, gasConsumption, mileage, averageSpeed);
 		this.brand = brand;
 	}
 

@@ -27,24 +27,24 @@ public class Runner {
 		while (scanner.hasNext()) {
 			String rate = scanner.next().replace(":", "");
 			String brand = scanner.next().toUpperCase();
-			int value = scanner.nextInt();
+			int cost = scanner.nextInt();
 			double gasConsumption = scanner.nextDouble();
 			int mileage = scanner.nextInt();
 			double averageSpeed = scanner.nextDouble();
 
 			switch (rate) {
 				case "BUDGET":
-					cars.add(new BudgetRateCar(value, gasConsumption, mileage,
+					cars.add(new BudgetRateCar(cost, gasConsumption, mileage,
 							 averageSpeed, BudgetRateBrand.valueOf(brand)));
 					break;
 
 				case "COMFORT":
-					cars.add(new ComfortRateCar(value, gasConsumption, mileage,
+					cars.add(new ComfortRateCar(cost, gasConsumption, mileage,
 							 averageSpeed, ComfortRateBrand.valueOf(brand)));
 					break;
 
 				case "BUSINESS":
-					cars.add(new BusinessRateCar(value, gasConsumption, mileage,
+					cars.add(new BusinessRateCar(cost, gasConsumption, mileage,
 							 averageSpeed, BusinessRateBrand.valueOf(brand)));
 					break;
 
@@ -61,7 +61,7 @@ public class Runner {
 
 			switch (menu()) {
 				case 1:
-					System.out.println("Value of cars: " + taxiGarage.calculateValueOfCars());
+					System.out.println("Value of cars: " + taxiGarage.calculateCostOfCars());
 					break;
 
 				case 2:
