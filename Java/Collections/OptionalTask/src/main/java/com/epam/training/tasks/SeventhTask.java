@@ -1,4 +1,4 @@
-package epamTraining.Tasks;
+package com.epam.training.tasks;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +9,9 @@ public class SeventhTask {
 	private Stack<Character> bracketsStack = new Stack<>();
 	private final List<Character> openingBrackets = Arrays.asList('{', '[', '(');
 	private final List<Character> closingBrackets = Arrays.asList('}', ']', ')');
+
+	public SeventhTask() {
+	}
 
 	public SeventhTask(String bracketsString) {
 		this.bracketsString = bracketsString;

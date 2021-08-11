@@ -1,6 +1,6 @@
-package epamTraining;
+package com.epam.training;
 
-import epamTraining.Tasks.*;
+import com.epam.training.tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,10 +14,10 @@ public class Runner {
 	public static void main(String[] args) {
 		switch (menu()) {
 			case 1:
-				FirstTask firstTask = new FirstTask(new File("file.txt"));
+				FirstTask firstTask = new FirstTask(new File("taskFiles\\file.txt"));
 				try {
 					List<String> lines = firstTask.getListOfLinesFromFile();
-					firstTask.writeLinesToFileInReverse(lines, "reverseFile.txt");
+					firstTask.writeLinesToFileInReverse(lines, "taskFiles\\reverseFile.txt");
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}
@@ -35,7 +35,7 @@ public class Runner {
 				break;
 
 			case 4:
-				FourthTask fourthTask = new FourthTask(new File("poem.txt"));
+				FourthTask fourthTask = new FourthTask(new File("taskFiles\\poem.txt"));
 				try {
 					List<String> lines = fourthTask.getListOfLinesFromFile();
 					fourthTask.sortLinesByLength(lines);
@@ -52,7 +52,7 @@ public class Runner {
 				break;
 
 			case 6:
-				SixthTask sixthTask = new SixthTask(new File("poem.txt"));
+				SixthTask sixthTask = new SixthTask(new File("taskFiles\\poem.txt"));
 				try {
 					List<String> lines = sixthTask.getListOfLinesFromFile();
 					sixthTask.sortLinesByAlphabet(lines);
@@ -72,7 +72,7 @@ public class Runner {
 				break;
 
 			case 8:
-				EighthTask eighthTask = new EighthTask(new File("someEnglishText.txt"));
+				EighthTask eighthTask = new EighthTask(new File("taskFiles\\someEnglishText.txt"));
 				try {
 					HashSet<String> wordsInFile = eighthTask.getSetOfDifferentWordsInFile();
 					System.out.println(wordsInFile);

@@ -1,17 +1,22 @@
-package epamTraining.Tasks;
+package com.epam.training.tasks;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ThirdTask {
 	private List<File> listOfDirectoryFiles = new ArrayList<>();
 
+	public List<File> getListOfDirectoryFiles() {
+		return listOfDirectoryFiles;
+	}
+
 	public void createListOfFilesInDirectoryAndItsSubdirectories(File directory) {
-		if (directory.isDirectory() && directory.listFiles() != null) {
-			for (File element : directory.listFiles()) {
+		if (directory.isDirectory()) {
+			for (File element : Objects.requireNonNull(directory.listFiles())) {
 				if (element.isFile()) {
-					listOfDirectoryFiles.add(element);
+					listOfDirectoryFiles.add(element.getAbsoluteFile());
 				} else if (element.isDirectory()) {
 					createListOfFilesInDirectoryAndItsSubdirectories(new File(element.getAbsolutePath()));
 				}

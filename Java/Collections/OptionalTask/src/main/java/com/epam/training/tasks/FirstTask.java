@@ -1,4 +1,4 @@
-package epamTraining.Tasks;
+package com.epam.training.tasks;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 public class FirstTask {
 	private File file;
+
+	public FirstTask() {
+	}
 
 	public FirstTask(File file) {
 		this.file = file;
@@ -25,7 +28,10 @@ public class FirstTask {
 	public void writeLinesToFileInReverse(List<String> lines, String fileName) {
 		try (Writer fileWriter = new FileWriter(fileName, false)) {
 			for (int i = lines.size() - 1; i >= 0; i--) {
-				fileWriter.write(lines.get(i) + System.lineSeparator());
+				fileWriter.write(lines.get(i));
+				if (i != 0) {
+					fileWriter.write(System.lineSeparator());
+				}
 			}
 		} catch(IOException e) {
 			System.out.println(e.getMessage());

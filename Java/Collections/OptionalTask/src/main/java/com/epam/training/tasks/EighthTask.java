@@ -1,4 +1,4 @@
-package epamTraining.Tasks;
+package com.epam.training.tasks;
 
 import java.io.File;
 import java.io.FileNotFoundException;

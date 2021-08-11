@@ -1,4 +1,4 @@
-package epamTraining.Tasks;
+package com.epam.training.tasks;
 
 import java.util.Stack;
 
@@ -9,10 +9,6 @@ public class SecondTask {
 	public SecondTask(int number) {
 		this.number = number;
 		getDigit(number);
-	}
-
-	public int getNumber() {
-		return number;
 	}
 
 	private void getDigit(int number) {
