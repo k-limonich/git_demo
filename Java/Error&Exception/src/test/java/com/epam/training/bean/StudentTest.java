@@ -19,8 +19,8 @@ public class StudentTest {
 
 	@BeforeEach
 	void setUp() {
-		student = new Student("John Peters", 18, 2,
-								COMPUTER_AIDED_DESIGN, GroupNumber.FIRST, new HashMap<>());
+		student = new Student("New Student", COMPUTER_AIDED_DESIGN,
+								GroupNumber.FIRST, new HashMap<>());
 	}
 
 	@Test
