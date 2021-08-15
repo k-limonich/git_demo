@@ -1,0 +1,12 @@
+package com.epam.training.constants;
+
+public enum Subject {
+	MATHEMATICS,
+	PHYSICS,
+	PROGRAMMING,
+	ENGINEERING_DRAWING,
+	INFORMATION_SECURITY,
+	STATISTICS,
+	ENGLISH,
+	ECONOMICS
+}
