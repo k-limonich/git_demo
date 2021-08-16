@@ -27,9 +27,6 @@ public class Group extends StudentsAssembly {
 
 	@Override
 	protected void add(Student newStudent) {
-		if (students == null) {
-			students = new ArrayList<>();
-		}
 		students.add(newStudent);
 	}
 }
