@@ -48,8 +48,6 @@ public class Runner {
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("File with students' data is not found");
-		} catch (IllegalArgumentException e) {
-			System.out.println("Incorrect option");
 		}
 	}
 
