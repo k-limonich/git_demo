@@ -74,15 +74,18 @@ public class University extends StudentsAssembly {
 				numberOfStudentsWithSubject++;
 			}
 		}
+		if (numberOfStudentsWithSubject == 0) {
+			throw new NoStudentsWithSuchSubjectException();
+		}
 		return (BigDecimal.valueOf(gradesSum / numberOfStudentsWithSubject)
 				.setScale(1, RoundingMode.HALF_UP).doubleValue());
 	}
 
 	public double getGradeAverageFor(Subject subject, FacultyName faculty, GroupNumber group) {
-		if (faculties[faculty.ordinal()].getStudents() == null) {
+		if (faculties[faculty.ordinal()].getStudents().isEmpty()) {
 			throw new EmptyFacultyException();
 		}
-		if (faculties[faculty.ordinal()].getGroups()[group.ordinal()].getStudents() == null) {
+		if (faculties[faculty.ordinal()].getGroups()[group.ordinal()].getStudents().isEmpty()) {
 			throw new EmptyGroupException();
 		}
 		double gradesSum = 0;
@@ -100,6 +103,9 @@ public class University extends StudentsAssembly {
 				gradesSum += student.getGrades().get(subject);
 				numberOfStudentsWithSubject++;
 			}
+		}
+		if (numberOfStudentsWithSubject == 0) {
+			throw new NoStudentsWithSuchSubjectException();
 		}
 		return (BigDecimal.valueOf(gradesSum / numberOfStudentsWithSubject)
 				.setScale(1, RoundingMode.HALF_UP).doubleValue());
