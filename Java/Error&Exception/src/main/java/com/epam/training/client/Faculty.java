@@ -5,7 +5,6 @@ import com.epam.training.constants.FacultyName;
 
 import static com.epam.training.constants.GroupNumber.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Faculty extends StudentsAssembly {

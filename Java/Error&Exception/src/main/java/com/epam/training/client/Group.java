@@ -3,8 +3,6 @@ package com.epam.training.client;
 import com.epam.training.bean.Student;
 import com.epam.training.constants.GroupNumber;
 
-import java.util.ArrayList;
-
 public class Group extends StudentsAssembly {
 
 	private final GroupNumber groupNumber;
