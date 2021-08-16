@@ -2,11 +2,12 @@ package com.epam.training.client;
 
 import com.epam.training.bean.Student;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class StudentsAssembly {
 
-	protected List<Student> students;
+	protected List<Student> students = new ArrayList<>();
 
 	protected StudentsAssembly() {
 	}
