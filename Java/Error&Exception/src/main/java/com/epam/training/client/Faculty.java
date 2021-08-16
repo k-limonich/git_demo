@@ -36,6 +36,8 @@ public class Faculty extends StudentsAssembly {
 
 	@Override
 	protected void add(Student newStudent) {
-		students.add(newStudent);
+		if (!students.contains(newStudent)) {
+			students.add(newStudent);
+		}
 	}
 }
