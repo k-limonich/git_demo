@@ -37,14 +37,13 @@ public class University extends StudentsAssembly {
 
 	@Override
 	public void add(Student newStudent) {
-		if (students.contains(newStudent)) {
-			return;
+		if (!students.contains(newStudent)) {
+			students.add(newStudent);
+			int facultyOrdinal = newStudent.getFaculty().ordinal();
+			faculties[facultyOrdinal].add(newStudent);
+			int groupOrdinal = newStudent.getGroupNumber().ordinal();
+			faculties[facultyOrdinal].getGroups()[groupOrdinal].add(newStudent);
 		}
-		students.add(newStudent);
-		int facultyOrdinal = newStudent.getFaculty().ordinal();
-		faculties[facultyOrdinal].add(newStudent);
-		int groupOrdinal = newStudent.getGroupNumber().ordinal();
-		faculties[facultyOrdinal].getGroups()[groupOrdinal].add(newStudent);
 	}
 
 	public void distributeStudentsByFacultiesAndGroups() {
