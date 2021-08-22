@@ -13,10 +13,11 @@ public class Runner {
 			throw new EmptyCommandLineArgumentsException();
 		}
 		File source = new File(args[0]);
+		DataProcessor dataProcessor = new DataProcessor(source);
 		if (source.isDirectory()) {
-			DataProcessor.writeFolderContentToTextFile(source, new File("tree.txt"));
+			dataProcessor.writeFolderContentToTextFile();
 		} else if (source.isFile()) {
-			DataProcessor.getTreeTextFileInfoInConsole(source);
+			dataProcessor.getTreeTextFileInfoInConsole();
 		} else {
 			throw new InvalidFileException();
 		}
