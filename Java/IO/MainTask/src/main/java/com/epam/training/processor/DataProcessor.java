@@ -2,52 +2,45 @@ package com.epam.training.processor;
 
 import com.epam.training.exceptions.NotAFolderException;
 import com.epam.training.exceptions.NotAFileException;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 
-public class DataProcessor {
+public class DataProcessor extends AbstractDataProcessor {
 
-	public static void writeFolderContentToTextFile(File source, File destination) {
-		if (!source.isDirectory()) {
-			throw new NotAFolderException("source file is not a folder");
-		}
-		try (FileWriter fileWriter = new FileWriter(destination)) {
-			createContentTree(source, fileWriter, 0);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public DataProcessor(File file) {
+		super(file);
 	}
 
-	private static void createContentTree(File folder, FileWriter fileWriter, int indent)
-			throws IOException {
+	public void writeFolderContentToTextFile() {
+		if (!getSource().isDirectory()) {
+			throw new NotAFolderException("source file is not a folder");
+		}
+		if (DESTINATION.exists()) {
+			DESTINATION.delete();
+		}
+		createContentTree(getSource(), 0);
+	}
+
+	private void createContentTree(File folder, int indent) {
 		if (folder.isDirectory()) {
-			fileWriter.write(getIndentString(indent));
-			fileWriter.write("+---");
-			fileWriter.write(folder.getName() + "/\n");
+			writeDataToFile(getIndentString(indent));
+			writeDataToFile("+---" + folder.getName() + "/\n");
 			for (File file : Objects.requireNonNull(folder.listFiles())) {
 				if (file.isDirectory()) {
-					createContentTree(file, fileWriter, indent + 1);
+					createContentTree(file, indent + 1);
 				} else if (file.isFile()) {
-					fileWriter.write(getIndentString(indent + 1));
-					fileWriter.write("+---");
-					fileWriter.write(file.getName() + "\n");
+					writeDataToFile(getIndentString(indent + 1));
+					writeDataToFile("+---" + file.getName() + "\n");
 				}
 			}
 		}
 	}
 
-	private static String getIndentString(int indent) {
+	private String getIndentString(int indent) {
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < indent; i++) {
 			builder.append("|	");
@@ -55,28 +48,23 @@ public class DataProcessor {
 		return builder.toString();
 	}
 
-	public static void getTreeTextFileInfoInConsole(File file) {
-		if (!file.isFile()) {
+	public void getTreeTextFileInfoInConsole() {
+		if (!getSource().isFile()) {
 			throw new NotAFileException();
 		}
-		try {
-			System.out.println(file.getAbsolutePath());
-			System.out.println("Number of folders: " + getNumberOfFolders(file));
-			System.out.println("Number of files: " + getNumberOfFiles(file));
-			System.out.println("Average number of files in a folder: "
-					+ getAverageNumberOfFilesInFolder(file));
-			System.out.println("Average file name length: "
-					+ getAverageFileNameLength(file));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.out.println(getSource().getAbsolutePath());
+		System.out.println("Number of folders: " + getNumberOfFolders());
+		System.out.println("Number of files: " + getNumberOfFiles());
+		System.out.println("Average number of files in a folder: "
+				+ getAverageNumberOfFilesInFolder());
+		System.out.println("Average file name length: "
+				+ getAverageFileNameLength());
 	}
 
-	private static int getNumberOfFolders(File file) throws FileNotFoundException {
-		Scanner scanner = new Scanner(file);
+	private int getNumberOfFolders() {
+		List<String> fileLines = readDataFromFile();
 		int numberOfDirectories = 0;
-		while (scanner.hasNextLine()) {
-			String line = scanner.nextLine();
+		for (String line : fileLines) {
 			if (line.contains("/")) {
 				numberOfDirectories++;
 			}
@@ -84,11 +72,10 @@ public class DataProcessor {
 		return numberOfDirectories;
 	}
 
-	private static int getNumberOfFiles(File file) throws FileNotFoundException {
-		Scanner scanner = new Scanner(file);
+	private int getNumberOfFiles() {
+		List<String> fileLines = readDataFromFile();
 		int numberOfFiles = 0;
-		while (scanner.hasNextLine()) {
-			String line = scanner.nextLine();
+		for (String line : fileLines) {
 			if (!line.contains("/")) {
 				numberOfFiles++;
 			}
@@ -96,19 +83,19 @@ public class DataProcessor {
 		return numberOfFiles;
 	}
 
-	private static double getAverageNumberOfFilesInFolder(File file) throws IOException {
-		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
+	private double getAverageNumberOfFilesInFolder() {
+		List<String> fileLines = readDataFromFile();
 		int filesInAllFolders = 0;
-		for (int i = 0; i < lines.size(); i++) {
-			if (lines.get(i).contains("/")) {
-				filesInAllFolders += getNumberOfFilesInFolder(lines, i);
+		for (int i = 0; i < fileLines.size(); i++) {
+			if (fileLines.get(i).contains("/")) {
+				filesInAllFolders += getNumberOfFilesInFolder(fileLines, i);
 			}
 		}
-		return BigDecimal.valueOf((double) filesInAllFolders / getNumberOfFolders(file))
+		return BigDecimal.valueOf((double) filesInAllFolders / getNumberOfFolders())
 				.setScale(1, RoundingMode.HALF_UP).doubleValue();
 	}
 
-	private static int getNumberOfFilesInFolder(List<String> lines, int index) {
+	private int getNumberOfFilesInFolder(List<String> lines, int index) {
 		int filesInThisFolder = 0;
 		int baseIndent = getIndentValue(lines.get(index));
 		for (int i = index + 1; i < lines.size(); i++) {
@@ -120,22 +107,26 @@ public class DataProcessor {
 		return filesInThisFolder;
 	}
 
-	private static int getIndentValue(String line) {
-		return StringUtils.countMatches(line, "|");
+	private int getIndentValue(String line) {
+		int matches = 0;
+		for (int i = 0; i < line.length(); i++) {
+			if (line.charAt(i) == '|') {
+				matches++;
+			}
+		}
+		return matches;
 	}
 
-	private static double getAverageFileNameLength(File file) throws FileNotFoundException {
-		Scanner scanner = new Scanner(file);
+	private double getAverageFileNameLength() {
+		List<String> fileLines = readDataFromFile();
 		int numberOfFiles = 0;
 		int sumOfFileNameLengths = 0;
-		while (scanner.hasNextLine()) {
-			String line = scanner.nextLine();
+		for (String line : fileLines) {
 			if (!line.contains("/")) {
 				numberOfFiles++;
-				String fileName = StringUtils.replaceChars(line, "|", "");
-				fileName = StringUtils.remove(fileName, "+---");
-				fileName = StringUtils.replaceChars(fileName, "\n\t", "");
-				sumOfFileNameLengths += fileName.length();
+				line = line.replace("|", "").replace("+---", "");
+				line = line.replace("\n\t", "");
+				sumOfFileNameLengths += line.length();
 			}
 		}
 		return BigDecimal.valueOf((double) sumOfFileNameLengths / numberOfFiles)
