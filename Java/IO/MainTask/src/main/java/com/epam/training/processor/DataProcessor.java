@@ -39,7 +39,7 @@ public class DataProcessor {
 				if (file.isDirectory()) {
 					createContentTree(file, fileWriter, indent + 1);
 				} else if (file.isFile()) {
-					fileWriter.write(getIndentString(indent));
+					fileWriter.write(getIndentString(indent + 1));
 					fileWriter.write("+---");
 					fileWriter.write(file.getName() + "\n");
 				}
@@ -115,7 +115,7 @@ public class DataProcessor {
 			int currentIndent = getIndentValue(lines.get(i));
 			if (currentIndent > baseIndent && !(lines.get(i).contains("/"))) {
 				filesInThisFolder++;
-			}
+			} else if (currentIndent == baseIndent) { break; }
 		}
 		return filesInThisFolder;
 	}

@@ -1,44 +1,12 @@
-+---MainTask/
-|	+---.idea/
-|	+---.gitignore
-|	+---compiler.xml
-|	+---encodings.xml
-|	+---jarRepositories.xml
-|	+---misc.xml
-|	+---uiDesigner.xml
-|	+---vcs.xml
-|	+---workspace.xml
-+---pom.xml
-|	+---src/
-|	|	+---main/
-|	|	|	+---java/
-|	|	|	|	+---com/
-|	|	|	|	|	+---epam/
-|	|	|	|	|	|	+---training/
-|	|	|	|	|	|	|	+---exceptions/
-|	|	|	|	|	|	|	+---EmptyCommandLineArgumentsException.java
-|	|	|	|	|	|	|	+---NotAFileException.java
-|	|	|	|	|	|	|	+---NotAFolderException.java
-|	|	|	|	|	|	|	+---processor/
-|	|	|	|	|	|	|	+---DataProcessor.java
-|	|	|	|	|	|	+---Runner.java
-|	|	+---test/
-|	|	|	+---java/
-|	|	|	|	+---com/
-|	|	|	|	|	+---epam/
-|	|	|	|	|	|	+---training/
-|	+---target/
-|	|	+---classes/
-|	|	|	+---com/
-|	|	|	|	+---epam/
-|	|	|	|	|	+---training/
-|	|	|	|	|	|	+---exceptions/
-|	|	|	|	|	|	+---EmptyCommandLineArgumentsException.class
-|	|	|	|	|	|	+---NotAFileException.class
-|	|	|	|	|	|	+---NotAFolderException.class
-|	|	|	|	|	|	+---processor/
-|	|	|	|	|	|	+---DataProcessor.class
-|	|	|	|	|	+---Runner.class
-|	|	+---generated-sources/
-|	|	|	+---annotations/
-+---tree.txt
++---java/
+|	+---com/
+|	|	+---epam/
+|	|	|	+---training/
+|	|	|	|	+---exceptions/
+|	|	|	|	|	+---EmptyCommandLineArgumentsException.java
+|	|	|	|	|	+---InvalidFileException.java
+|	|	|	|	|	+---NotAFileException.java
+|	|	|	|	|	+---NotAFolderException.java
+|	|	|	|	+---processor/
+|	|	|	|	|	+---DataProcessor.java
+|	|	|	|	+---Runner.java
