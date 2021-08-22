@@ -13,10 +13,6 @@ public abstract class AbstractDataProcessor {
 		this.source = source;
 	}
 
-	public AbstractDataProcessor(String fileName) {
-		source = new File(fileName);
-	}
-
 	public File getSource() {
 		return source;
 	}
