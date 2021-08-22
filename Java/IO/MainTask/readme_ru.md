@@ -26,7 +26,7 @@ Amon Amarth\
 |       10 A Dream That Cannot Be (feat. Doro Pesch).mp3\
 |       11 Back On Northern Shores.mp3\
 |       12 Death In Fire 2016.mp3\
-|       13 Death In Fire (Live).mp3\
+|       13 Death In Fire (Live).mp3
 
 Если в качестве параметра в программу передается не путь к директории, а путь к txt файлу по образцу выше - прочитать файл и вывести в консоль следующие данные:
 
