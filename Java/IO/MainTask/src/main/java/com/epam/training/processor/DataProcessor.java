@@ -52,46 +52,39 @@ public class DataProcessor extends AbstractDataProcessor {
 		if (!getSource().isFile()) {
 			throw new NotAFileException();
 		}
+		List<String> fileLines = readDataFromFile();
 		System.out.println(getSource().getAbsolutePath());
-		System.out.println("Number of folders: " + getNumberOfFolders());
-		System.out.println("Number of files: " + getNumberOfFiles());
+		System.out.println("Number of folders: " + getNumber(false, fileLines));
+		System.out.println("Number of files: " + getNumber(true, fileLines));
 		System.out.println("Average number of files in a folder: "
-				+ getAverageNumberOfFilesInFolder());
+				+ getAverageNumberOfFilesInFolder(fileLines));
 		System.out.println("Average file name length: "
-				+ getAverageFileNameLength());
+				+ getAverageFileNameLength(fileLines));
 	}
 
-	private int getNumberOfFolders() {
-		List<String> fileLines = readDataFromFile();
+	private int getNumber(boolean isNumberOfFiles, List<String> fileLines) {
 		int numberOfDirectories = 0;
-		for (String line : fileLines) {
-			if (line.contains("/")) {
-				numberOfDirectories++;
-			}
-		}
-		return numberOfDirectories;
-	}
-
-	private int getNumberOfFiles() {
-		List<String> fileLines = readDataFromFile();
 		int numberOfFiles = 0;
 		for (String line : fileLines) {
-			if (!line.contains("/")) {
+			if (!isNumberOfFiles && line.contains("/")) {
+				numberOfDirectories++;
+			}
+			if (isNumberOfFiles && !line.contains("/")) {
 				numberOfFiles++;
 			}
 		}
-		return numberOfFiles;
+		if (isNumberOfFiles) { return numberOfFiles; }
+		else { return numberOfDirectories; }
 	}
 
-	private double getAverageNumberOfFilesInFolder() {
-		List<String> fileLines = readDataFromFile();
+	private double getAverageNumberOfFilesInFolder(List<String> fileLines) {
 		int filesInAllFolders = 0;
 		for (int i = 0; i < fileLines.size(); i++) {
 			if (fileLines.get(i).contains("/")) {
 				filesInAllFolders += getNumberOfFilesInFolder(fileLines, i);
 			}
 		}
-		return BigDecimal.valueOf((double) filesInAllFolders / getNumberOfFolders())
+		return BigDecimal.valueOf((double) filesInAllFolders / getNumber(false, fileLines))
 				.setScale(1, RoundingMode.HALF_UP).doubleValue();
 	}
 
@@ -117,8 +110,7 @@ public class DataProcessor extends AbstractDataProcessor {
 		return matches;
 	}
 
-	private double getAverageFileNameLength() {
-		List<String> fileLines = readDataFromFile();
+	private double getAverageFileNameLength(List<String> fileLines) {
 		int numberOfFiles = 0;
 		int sumOfFileNameLengths = 0;
 		for (String line : fileLines) {
