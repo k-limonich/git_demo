@@ -1,0 +1,4 @@
+There is 7 string values in this line
+2.222 line contains a char
+Here we have an integer and 6.5 + 0.5 strings
+@ this line file ends ; 4.8 / 4 = 1.2

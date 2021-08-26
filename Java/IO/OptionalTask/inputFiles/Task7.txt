@@ -1,0 +1,3 @@
+Naming conventions make programs more understandable by making them easier to read.
+They can also give information about the function of the identifier — for example, whether it’s a
+constant, package, or class — which can be helpful in understanding the code.

@@ -1,0 +1,10 @@
+Arkhipienko,6,4,7,8
+Borysevich,8,9,7,10
+Doroshevich,4,6,5,5
+Ivanov,9,8,10,6
+Novikov,7,8,6,7
+Pashkevich,4,4,7,9
+Romanchuk,7,4,6,10
+Stankievich,9,9,6,7
+Valadzko,6,7,8,7
+Zakharenko,4,5,8,6

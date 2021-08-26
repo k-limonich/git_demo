@@ -1,0 +1,4 @@
+It is generally a good idea to use parentheses liberally in expressions involving mixed operators
+to avoid operator precedence problems. Even if the operator precedence seems clear to you,
+it might not be to others — you shouldn't assume that other programmers know precedence as
+well as you do.
