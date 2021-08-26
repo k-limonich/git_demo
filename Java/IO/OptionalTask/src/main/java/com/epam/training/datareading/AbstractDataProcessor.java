@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class AbstractDataProcessor {
 
-	private static final String OUTPUT_FILES_FOLDER = "outputFiles";
+	private static final String OUTPUT_FOLDER = "outputFiles";
 
 	protected static String readFileToString(File file) {
 		StringBuilder data = new StringBuilder();
@@ -37,7 +37,7 @@ public abstract class AbstractDataProcessor {
 	}
 
 	protected static void writeTextToFile(String fileName, String data) {
-		File dest = new File(OUTPUT_FILES_FOLDER + File.separator + fileName);
+		File dest = new File(OUTPUT_FOLDER + File.separator + fileName);
 		dest.getParentFile().mkdir();
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(dest))) {
 			bufferedWriter.write(data);
@@ -47,7 +47,7 @@ public abstract class AbstractDataProcessor {
 	}
 
 	protected static void writeTextToFile(String fileName, List<String> lines) {
-		File dest = new File(OUTPUT_FILES_FOLDER + File.separator + fileName);
+		File dest = new File(OUTPUT_FOLDER + File.separator + fileName);
 		dest.getParentFile().mkdir();
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(dest))) {
 			for (int i = 0; i < lines.size(); i++) {
@@ -62,7 +62,7 @@ public abstract class AbstractDataProcessor {
 	}
 
 	protected static void writeIntegersToFile(String fileName, List<Integer> integerList) {
-		File dest = new File(OUTPUT_FILES_FOLDER + File.separator + fileName);
+		File dest = new File(OUTPUT_FOLDER + File.separator + fileName);
 		dest.getParentFile().mkdir();
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(dest))) {
 			for (int i = 0; i < integerList.size(); i++) {
