@@ -1,43 +1,43 @@
 package com.epam.training.datareading.javafile;
 
-import com.epam.training.datareading.AbstractDataProcessor;
+import com.epam.training.datareading.DataProcessUtils;
 
 import java.io.File;
 import java.util.List;
 
-public class JavaFileProcessor extends AbstractDataProcessor {
+public class JavaFileProcessor {
 
 	//Task 2
 	public static void replacePublicFieldsAndMethodsWithPrivate(String pathname) {
 		File javaFile = new File(pathname);
 		String constructor = javaFile.getName().replace(".java", "") + "(";
-		List<String> fileLines = readFileToStringList(javaFile);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(javaFile);
 		for (int i = 0; i < fileLines.size(); i++) {
 			String line = fileLines.get(i);
-			if (line.contains("public") && !(line.contains("class"))
-					&& !(line.contains("enum")) && !(line.contains("interface"))
-					&& !(line.contains(constructor))) {
+			if (line.contains("public") && !((line.contains("class"))
+					&& (line.contains("enum")) && (line.contains("interface"))
+					&& (line.contains(constructor)))) {
 				fileLines.set(i, line.replace("public", "private"));
 			}
 		}
-		writeTextToFile("Task2.java", fileLines);
+		DataProcessUtils.writeTextToFile("Task2.java", fileLines);
 	}
 
 	//Task 3
 	public static void reverseEachLine(String pathname) {
 		File javaFile = new File(pathname);
-		List<String> fileLines = readFileToStringList(javaFile);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(javaFile);
 		for (int i = 0; i < fileLines.size(); i++) {
 			StringBuilder line = new StringBuilder(fileLines.get(i));
 			fileLines.set(i, line.reverse().toString());
 		}
-		writeTextToFile("Task3.java", fileLines);
+		DataProcessUtils.writeTextToFile("Task3.java", fileLines);
 	}
 
 	//Task 4
 	public static void toUpperCaseMoreThanTwoLetterWords(String pathname) {
 		File javaFile = new File(pathname);
-		List<String> fileLines = readFileToStringList(javaFile);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(javaFile);
 		for (int i = 0; i < fileLines.size(); i++) {
 			String oldLine = fileLines.get(i);
 			StringBuilder newLine = new StringBuilder();
@@ -59,13 +59,13 @@ public class JavaFileProcessor extends AbstractDataProcessor {
 			}
 			fileLines.set(i, newLine.toString());
 		}
-		writeTextToFile("Task4.java", fileLines);
+		DataProcessUtils.writeTextToFile("Task4.java", fileLines);
 	}
 
 	//Task 8
 	public static void removeRedundantBlankSpaces(String pathname) {
 		File javaFile = new File(pathname);
-		List<String> fileLines = readFileToStringList(javaFile);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(javaFile);
 		for (int i = 0; i < fileLines.size(); i++) {
 			String line = fileLines.get(i);
 			line = line.replaceAll("\\p{Blank}+", " ");
@@ -73,15 +73,15 @@ public class JavaFileProcessor extends AbstractDataProcessor {
 			line = line.replaceAll("(?<=[\\p{P}])\\p{Blank}+", "");
 			fileLines.set(i, line.trim());
 		}
-		writeTextToFile("Task8.java", fileLines);
+		DataProcessUtils.writeTextToFile("Task8.java", fileLines);
 	}
 
 	//Task 9
 	public static void removeComments(String pathname) {
 		File javaFile = new File(pathname);
-		String fileLine = readFileToString(javaFile);
-		fileLine = fileLine.replaceAll("(/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*+/|[ \\t]*//.*)", "");
-		writeTextToFile("Task9.java", fileLine);
+		String fileString = DataProcessUtils.readFileToString(javaFile);
+		fileString = fileString.replaceAll("(/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*\\*+/|[ \\t]*//.*)", "");
+		DataProcessUtils.writeTextToFile("Task9.java", fileString);
 	}
 
 }

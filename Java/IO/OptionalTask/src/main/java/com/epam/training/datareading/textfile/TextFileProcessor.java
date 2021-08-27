@@ -1,13 +1,13 @@
 package com.epam.training.datareading.textfile;
 
-import com.epam.training.datareading.AbstractDataProcessor;
+import com.epam.training.datareading.DataProcessUtils;
 
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
-public class TextFileProcessor extends AbstractDataProcessor {
+public class TextFileProcessor {
 
 	//Task 1
 	public static void createFileWithSortedRandomNumbers(int amountOfNumbers, int bound) {
@@ -17,13 +17,13 @@ public class TextFileProcessor extends AbstractDataProcessor {
 			numbers.add(random.nextInt(bound * 2) - bound);
 		}
 		numbers.sort(Comparator.comparingInt(o -> o));
-		writeIntegersToFile("Task1.txt", numbers);
+		DataProcessUtils.writeIntegersToFile("Task1.txt", numbers);
 	}
 
 	//Task 5
 	public static void toUpperCaseStudentsWithGradeAverageAbove7(String pathname) {
 		File file = new File(pathname);
-		List<String> fileLines = readFileToStringList(file);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(file);
 		for (int i = 0; i < fileLines.size(); i++) {
 			String oldLine = fileLines.get(i);
 			StringBuilder newLine = new StringBuilder();
@@ -45,7 +45,7 @@ public class TextFileProcessor extends AbstractDataProcessor {
 			}
 			fileLines.set(i, newLine.toString());
 		}
-		writeTextToFile("Task5.txt", fileLines);
+		DataProcessUtils.writeTextToFile("Task5.txt", fileLines);
 	}
 
 	//Task 5 auxiliary method
@@ -57,7 +57,7 @@ public class TextFileProcessor extends AbstractDataProcessor {
 	//Task 6
 	public static void defineAllDataTypes(String pathname, String[] dataTypes) {
 		File file = new File(pathname);
-		List<String> fileLines = readFileToStringList(file);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(file);
 		Map<String, String> valuesMap = new HashMap<>();
 		for (String line : fileLines) {
 			String[] values = line.split("\\p{Blank}");
@@ -99,7 +99,7 @@ public class TextFileProcessor extends AbstractDataProcessor {
 	//Task 7
 	public static void removeMaxEvenNumberOfWordsWith3To5Symbols(String pathname) {
 		File file = new File(pathname);
-		List<String> fileLines = readFileToStringList(file);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(file);
 		for (int i = 0; i < fileLines.size(); i++) {
 			String line = fileLines.get(i);
 			StringBuilder newLine = new StringBuilder();
@@ -122,7 +122,7 @@ public class TextFileProcessor extends AbstractDataProcessor {
 			}
 			fileLines.set(i, newLine.toString().replaceAll("\\p{Blank}+", " ").trim());
 		}
-		writeTextToFile("Task7.txt", fileLines);
+		DataProcessUtils.writeTextToFile("Task7.txt", fileLines);
 	}
 
 	//Task 7 auxiliary method
@@ -140,7 +140,7 @@ public class TextFileProcessor extends AbstractDataProcessor {
 	//Task 10
 	public static void switchFirstAndLastWordsInEachLine(String pathname) {
 		File file = new File(pathname);
-		List<String> fileLines = readFileToStringList(file);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(file);
 		for (int i = 0; i < fileLines.size(); i++) {
 			String line = fileLines.get(i);
 			String[] words = line.split("\\p{Blank}+");
@@ -152,7 +152,7 @@ public class TextFileProcessor extends AbstractDataProcessor {
 			line = wordsArrayToString(words);
 			fileLines.set(i, line);
 		}
-		writeTextToFile("Task10.txt", fileLines);
+		DataProcessUtils.writeTextToFile("Task10.txt", fileLines);
 	}
 
 	//Task 10 auxiliary method
@@ -180,7 +180,7 @@ public class TextFileProcessor extends AbstractDataProcessor {
 	//Task 11
 	public static void leaveMLastWordsInNLastLines(String pathname, int n, int m) {
 		File file = new File(pathname);
-		List<String> fileLines = readFileToStringList(file);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(file);
 		if (n > fileLines.size()) {
 			n = 0;
 		} else {
@@ -193,7 +193,7 @@ public class TextFileProcessor extends AbstractDataProcessor {
 			line = wordsArrayToString(words).trim();
 			fileLines.set(i, line);
 		}
-		writeTextToFile("Task11.txt", fileLines);
+		DataProcessUtils.writeTextToFile("Task11.txt", fileLines);
 	}
 
 	//Task 11 auxiliary method
@@ -211,13 +211,13 @@ public class TextFileProcessor extends AbstractDataProcessor {
 	//Task 12
 	public static void findPalindromes(String pathname) {
 		File file = new File(pathname);
-		List<String> fileLines = readFileToStringList(file);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(file);
 		Set<String> palindromes = new HashSet<>();
 		for (String line : fileLines) {
 			String[] words = line.split("\\p{Blank}+");
 			addPalindromes(palindromes, words);
 		}
-		writeTextToFile("Task12.txt", "Palindromes: " + palindromes);
+		DataProcessUtils.writeTextToFile("Task12.txt", "Palindromes: " + palindromes);
 	}
 
 	//Task 12 auxiliary method
@@ -234,7 +234,7 @@ public class TextFileProcessor extends AbstractDataProcessor {
 	//Task 13
 	public static void findPhonesStartingWith(String pathname, int k, int j) {
 		File file = new File(pathname);
-		List<String> fileLines = readFileToStringList(file);
+		List<String> fileLines = DataProcessUtils.readFileToStringList(file);
 		List<String> matchingPhones = new ArrayList<>();
 		for (String line : fileLines) {
 			String[] values = line.split("\\p{Blank}+");
@@ -244,6 +244,6 @@ public class TextFileProcessor extends AbstractDataProcessor {
 				matchingPhones.add(line);
 			}
 		}
-		writeTextToFile("Task13.java", matchingPhones);
+		DataProcessUtils.writeTextToFile("Task13.java", matchingPhones);
 	}
 }
