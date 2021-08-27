@@ -1,14 +1,22 @@
 package com.epam.training.datareading;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDataProcessor {
+public final class DataProcessUtils {
+
+	private DataProcessUtils() {
+	}
 
 	private static final String OUTPUT_FOLDER = "outputFiles";
 
-	protected static String readFileToString(File file) {
+	public static String readFileToString(File file) {
 		StringBuilder data = new StringBuilder();
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 			int symbol = bufferedReader.read();
@@ -22,7 +30,7 @@ public abstract class AbstractDataProcessor {
 		return data.toString();
 	}
 
-	protected static List<String> readFileToStringList(File file) {
+	public static List<String> readFileToStringList(File file) {
 		List<String> lines = new ArrayList<>();
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 			String line = bufferedReader.readLine();
@@ -36,7 +44,7 @@ public abstract class AbstractDataProcessor {
 		return lines;
 	}
 
-	protected static void writeTextToFile(String fileName, String data) {
+	public static void writeTextToFile(String fileName, String data) {
 		File dest = new File(OUTPUT_FOLDER + File.separator + fileName);
 		dest.getParentFile().mkdir();
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(dest))) {
@@ -46,7 +54,7 @@ public abstract class AbstractDataProcessor {
 		}
 	}
 
-	protected static void writeTextToFile(String fileName, List<String> lines) {
+	public static void writeTextToFile(String fileName, List<String> lines) {
 		File dest = new File(OUTPUT_FOLDER + File.separator + fileName);
 		dest.getParentFile().mkdir();
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(dest))) {
@@ -61,7 +69,7 @@ public abstract class AbstractDataProcessor {
 		}
 	}
 
-	protected static void writeIntegersToFile(String fileName, List<Integer> integerList) {
+	public static void writeIntegersToFile(String fileName, List<Integer> integerList) {
 		File dest = new File(OUTPUT_FOLDER + File.separator + fileName);
 		dest.getParentFile().mkdir();
 		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(dest))) {
