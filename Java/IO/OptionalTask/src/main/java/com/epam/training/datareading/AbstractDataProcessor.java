@@ -10,11 +10,11 @@ public abstract class AbstractDataProcessor {
 
 	protected static String readFileToString(File file) {
 		StringBuilder data = new StringBuilder();
-		try (FileReader fileReader = new FileReader(file)) {
-			int symbol = fileReader.read();
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			int symbol = bufferedReader.read();
 			while (symbol != -1) {
 				data.append((char) symbol);
-				symbol = fileReader.read();
+				symbol = bufferedReader.read();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
