@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CarPark {
 
-	private int id;
+	private final int id;
 	private BlockingQueue<ParkingSpace> availableParkingSpaces;
 	private Semaphore semaphore;
 

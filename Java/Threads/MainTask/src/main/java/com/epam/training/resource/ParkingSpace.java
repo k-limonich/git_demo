@@ -5,8 +5,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ParkingSpace {
 
-	private int carParkId;
-	private int parkingSpaceId;
+	private final int carParkId;
+	private final int parkingSpaceId;
 
 	public ParkingSpace(int carParkId, int parkingSpaceId) {
 		this.carParkId = carParkId;
