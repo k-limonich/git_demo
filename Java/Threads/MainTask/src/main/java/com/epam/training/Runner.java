@@ -19,7 +19,7 @@ public class Runner {
 	public static CarParkPool setUpPool() {
 		CarParkPool carParkPool = new CarParkPool();
 		for (int i = 0; i < 3; i++) {
-			int carParkSize = new Random().nextInt(5) + 7;
+			int carParkSize = new Random().nextInt(5) + 10;
 			carParkPool.addCarParkToPool(new CarPark(i, carParkSize));
 		}
 		return carParkPool;
