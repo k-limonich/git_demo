@@ -20,6 +20,6 @@ public class Runway {
 
 	@Override
 	public String toString() {
-		return "RUNWAY-" + id;
+		return "RUNWAY #" + id;
 	}
 }
