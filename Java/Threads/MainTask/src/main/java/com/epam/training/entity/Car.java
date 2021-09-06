@@ -12,7 +12,7 @@ public class Car extends Thread {
 
 	public Car(int id, CarParkPool carParkPool) {
 		this.id = id;
-		this.setName("Car-" + id);
+		this.setName("CAR #" + id);
 		this.carParkPool = carParkPool;
 	}
 
