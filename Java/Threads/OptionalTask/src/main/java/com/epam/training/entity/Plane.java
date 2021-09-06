@@ -10,7 +10,7 @@ public class Plane extends Thread {
 
 	public Plane(int id, Airport airport) {
 		this.id = id;
-		this.setName("PLANE-" + id);
+		this.setName("PLANE #" + id);
 		this.airport = airport;
 	}
 
