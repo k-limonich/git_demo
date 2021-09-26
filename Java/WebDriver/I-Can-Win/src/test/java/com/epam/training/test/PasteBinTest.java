@@ -12,7 +12,7 @@ public class PasteBinTest {
 
 	private WebDriver driver;
 
-	private final String rawPasteData = "Just a new paste";
+	private final String rawPasteData = "Hello from WebDriver";
 	private final String expirationTimeOption = "10 Minutes";
 	private final String pasteName = "helloweb";
 
