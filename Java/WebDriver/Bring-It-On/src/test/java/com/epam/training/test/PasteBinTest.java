@@ -24,6 +24,7 @@ public class PasteBinTest {
 	@BeforeClass(alwaysRun = true)
 	public void browserSetUp() {
 		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 	}
 
 	@BeforeClass(alwaysRun = true)

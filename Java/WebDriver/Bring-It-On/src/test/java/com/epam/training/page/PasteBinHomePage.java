@@ -34,7 +34,6 @@ public class PasteBinHomePage extends AbstractPage {
 
 	public PasteBinHomePage(WebDriver driver) {
 		super(driver);
-		driver.manage().window().maximize();
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class PasteBinHomePage extends AbstractPage {
 				.until(ExpectedConditions.elementToBeClickable(syntaxHighlightingDropDownList))
 				.click();
 		new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-				.until(ExpectedConditions.presenceOfElementLocated(
+				.until(ExpectedConditions.elementToBeClickable(
 						By.xpath(buildDropDownListOptionLocator(highlightingLanguage))))
 				.click();
 		return this;
@@ -74,7 +73,7 @@ public class PasteBinHomePage extends AbstractPage {
 				.until(ExpectedConditions.elementToBeClickable(expirationTimeDropDownList))
 				.click();
 		new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-				.until(ExpectedConditions.presenceOfElementLocated(
+				.until(ExpectedConditions.elementToBeClickable(
 						By.xpath(buildDropDownListOptionLocator(expirationTime))))
 				.click();
 		return this;
