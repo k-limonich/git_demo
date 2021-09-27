@@ -70,9 +70,8 @@ public class PasteBinHomePage {
 
 	public boolean createNewPaste() {
 		createPasteButton.click();
-		new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-				.until(ExpectedConditions.presenceOfElementLocated(By.xpath(successNoticeLocator)));
-		List<WebElement> successNotice = driver.findElements(By.xpath(successNoticeLocator));
+		List<WebElement> successNotice = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+				.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(successNoticeLocator)));
 		return !successNotice.isEmpty();
 	}
 }
