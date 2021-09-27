@@ -9,8 +9,9 @@ public class SuccessfulPasteCreationPage extends AbstractPage {
 
 	private String pasteTitle;
 
-	private final By syntaxHighlightingButtonLocator = By.xpath("//div[@class='top-buttons']/div[@class='left']/*");
-	private final By rawPasteDataLocator = By.tagName("textarea");
+	private final By successNoticeLocator = By.xpath("//div[contains(@class, 'success')]");
+	private final By highlightingLocator = By.xpath("//div[@class='top-buttons']/div[@class='left']/*");
+	private final By rawPasteDataLocator = By.xpath("//*[contains(text(), 'RAW Paste Data')]/following-sibling::*");
 
 	public SuccessfulPasteCreationPage(WebDriver driver, String pasteTitle) {
 		super(driver);
@@ -19,14 +20,13 @@ public class SuccessfulPasteCreationPage extends AbstractPage {
 
 	public SuccessfulPasteCreationPage waitUntilLoaded() {
 		new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-				.until(ExpectedConditions.presenceOfElementLocated(
-						By.xpath("//div[contains(@class, 'success')]")));
+				.until(ExpectedConditions.presenceOfElementLocated(successNoticeLocator));
 		return this;
 	}
 
 	public String determineSyntaxHighlightingLanguage() {
 		return new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-				.until(ExpectedConditions.presenceOfElementLocated(syntaxHighlightingButtonLocator))
+				.until(ExpectedConditions.presenceOfElementLocated(highlightingLocator))
 				.getText();
 	}
 
