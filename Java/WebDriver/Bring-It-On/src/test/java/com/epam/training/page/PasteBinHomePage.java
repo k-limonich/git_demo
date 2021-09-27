@@ -12,7 +12,7 @@ public class PasteBinHomePage extends AbstractPage {
 
 	private static String HOMEPAGE_URL = "https://pastebin.com";
 
-	@FindBy(tagName = "textarea")
+	@FindBy(xpath = "//textarea[@id='postform-text']")
 	private WebElement textInput;
 
 	@FindBy(xpath = "//div[contains(@class, 'expiration')]/descendant::span[@role='presentation']")
