@@ -16,13 +16,13 @@ public class PasteBinTest {
 	private final String expirationTimeOption = "10 Minutes";
 	private final String pasteName = "helloweb";
 
-	@BeforeMethod
+	@BeforeMethod(description = "Chrome browser setup")
 	public void browserSetUp() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 	}
 
-	@Test
+	@Test(description = "New paste creation test")
 	public void shouldCreateNewPaste() {
 		boolean newPasteIsCreated = new PasteBinHomePage(driver)
 				.openPage()
@@ -30,10 +30,10 @@ public class PasteBinTest {
 				.selectExpirationTime(expirationTimeOption)
 				.enterPasteName(pasteName)
 				.createNewPaste();
-		Assert.assertTrue(newPasteIsCreated);
+		Assert.assertTrue(newPasteIsCreated, "Successful paste creation notice wasn't found");
 	}
 
-	@AfterMethod
+	@AfterMethod(description = "Chrome browser teardown")
 	public void browserTearDown() {
 		driver.quit();
 	}
