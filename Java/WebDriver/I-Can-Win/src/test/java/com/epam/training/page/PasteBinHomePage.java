@@ -18,7 +18,7 @@ public class PasteBinHomePage {
 
 	private WebDriver driver;
 
-	@FindBy(tagName = "textarea")
+	@FindBy(xpath = "//textarea[@id='postform-text']")
 	private WebElement textInput;
 
 	@FindBy(xpath = "//div[contains(@class, 'expiration')]/descendant::span[@role='presentation']")
@@ -30,7 +30,7 @@ public class PasteBinHomePage {
 	@FindBy(xpath = "//button[@type='submit']")
 	private WebElement createPasteButton;
 
-	private final String expirationTimeDefaultLocator = "//*[@role='listbox']/*[contains(., '%s')]";
+	private final String expirationTimeOptionDefaultLocator = "//*[@role='listbox']/*[contains(., '%s')]";
 	private final String successNoticeLocator = "//div[contains(@class, 'success')]";
 
 	public PasteBinHomePage(WebDriver driver) {
@@ -60,7 +60,7 @@ public class PasteBinHomePage {
 	}
 
 	private String buildExpirationTimeLocator(String expirationTimeOption) {
-		return String.format(expirationTimeDefaultLocator, expirationTimeOption);
+		return String.format(expirationTimeOptionDefaultLocator, expirationTimeOption);
 	}
 
 	public PasteBinHomePage enterPasteName(String pasteName) {
