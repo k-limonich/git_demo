@@ -43,9 +43,9 @@ public class PricingCalculatorFrame extends AbstractPage {
 		return this;
 	}
 
-	public PricingCalculatorFrame chooseDdlOption(DdlName label, String option) {
+	public PricingCalculatorFrame chooseDdlOption(DdlName ddlName, String option) {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
-				buildDdlLocator(label.toString()))))
+				buildDdlLocator(ddlName.toString()))))
 				.click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 				buildDdlOptionLocator(option))))
@@ -53,8 +53,8 @@ public class PricingCalculatorFrame extends AbstractPage {
 		return this;
 	}
 
-	private String buildDdlLocator(String ddlLabel) {
-		return String.format(ddlBaseLocator, ddlLabel);
+	private String buildDdlLocator(String ddlName) {
+		return String.format(ddlBaseLocator, ddlName);
 	}
 
 	private String buildDdlOptionLocator(String option) {
