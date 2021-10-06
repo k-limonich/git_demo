@@ -42,7 +42,7 @@ public class GoogleCloudPriceCalculatorTest {
 		driver.manage().window().maximize();
 	}
 
-	@BeforeClass
+	@BeforeClass(description = "Go to pricing calculator page, fill in the form, press ADD TO ESTIMATE")
 	void pricingEstimateSetUp() {
 		pricingEstimate = new GoogleCloudHomePage(driver)
 				.openPage()
@@ -64,34 +64,40 @@ public class GoogleCloudPriceCalculatorTest {
 				.pressAddToEstimate();
 	}
 
-	@Test
+	@Test(description = "check VM Class")
 	void testVMClassIsCorrect() {
-		Assert.assertTrue(pricingEstimate.checkVMClassEqualsTo(expectedVMClass));
+		Assert.assertTrue(pricingEstimate.checkVMClassEqualsTo(expectedVMClass),
+						"VM Class item is incorrect");
 	}
 
-	@Test
-	void testInstanceIsCorrect() {
-		Assert.assertTrue(pricingEstimate.checkInstanceTypeEqualsTo(expectedInstanceType));
+	@Test(description = "check Instance type")
+	void testInstanceTypeIsCorrect() {
+		Assert.assertTrue(pricingEstimate.checkInstanceTypeEqualsTo(expectedInstanceType),
+						"Instance type item is incorrect");
 	}
 
-	@Test
+	@Test(description = "check Region")
 	void testRegionIsCorrect() {
-		Assert.assertTrue(pricingEstimate.checkRegionEqualsTo(expectedRegion));
+		Assert.assertTrue(pricingEstimate.checkRegionEqualsTo(expectedRegion),
+						"Region item is incorrect");
 	}
 
-	@Test
+	@Test(description = "check Local SSD")
 	void testLocalSSDIsCorrect() {
-		Assert.assertTrue(pricingEstimate.checkLocalSSDEqualsTo(expectedLocalSSD));
+		Assert.assertTrue(pricingEstimate.checkLocalSSDEqualsTo(expectedLocalSSD),
+						"Local SSD item is incorrect");
 	}
 
-	@Test
+	@Test(description = "check Commitment term")
 	void testCommitmentTerm() {
-		Assert.assertTrue(pricingEstimate.checkCommitmentTermEqualsTo(expectedCommitmentTerm));
+		Assert.assertTrue(pricingEstimate.checkCommitmentTermEqualsTo(expectedCommitmentTerm),
+						"Commitment term item is incorrect");
 	}
 
-	@Test
+	@Test(description = "check Total price")
 	void testTotalPriceIsCorrect() {
-		Assert.assertTrue(pricingEstimate.checkTotalPriceEqualsTo(expectedTotalPrice));
+		Assert.assertTrue(pricingEstimate.checkTotalPriceEqualsTo(expectedTotalPrice),
+						"Total price item is incorrect");
 	}
 
 	@AfterClass(alwaysRun = true)
