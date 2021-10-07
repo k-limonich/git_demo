@@ -21,8 +21,8 @@ public class PricingCalculatorFrame extends AbstractPage {
 	@FindBy(xpath = "//button[@aria-label='Add to Estimate']")
 	private WebElement addToEstimateButton;
 
-	private final String ddlBaseLocator = "//label[contains(., '%s')]/parent::*/descendant::span[@class='md-select-icon']";
-	private final String ddlOptionBaseLocator = "//div[@aria-hidden='false']/descendant::md-option/div[contains(@class, 'md-text') and contains(., '%s')]";
+	private final static String DDL_BASE_LOCATOR = "//label[contains(., '%s')]/parent::*/descendant::span[@class='md-select-icon']";
+	private final static String DDL_OPTION_BASE_LOCATOR = "//div[@aria-hidden='false']/descendant::md-option/div[contains(@class, 'md-text') and contains(., '%s')]";
 
 	public PricingCalculatorFrame(WebDriver driver) {
 		super(driver);
@@ -54,11 +54,11 @@ public class PricingCalculatorFrame extends AbstractPage {
 	}
 
 	private String buildDdlLocator(String ddlName) {
-		return String.format(ddlBaseLocator, ddlName);
+		return String.format(DDL_BASE_LOCATOR, ddlName);
 	}
 
 	private String buildDdlOptionLocator(String option) {
-		return String.format(ddlOptionBaseLocator, option);
+		return String.format(DDL_OPTION_BASE_LOCATOR, option);
 	}
 
 	public PricingCalculatorFrame enableAddGPUsCheckbox() {

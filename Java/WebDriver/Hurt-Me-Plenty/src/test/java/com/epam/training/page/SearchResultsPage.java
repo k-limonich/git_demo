@@ -6,9 +6,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SearchResultsPage extends AbstractPage {
 
-	private String searchTerm;
+	private final String searchTerm;
 
-	private final String defaultSearchResultLocator = "//a[@class='gs-title' and contains(., '%s')]";
+	private final static String DEFAULT_SEARCH_RESULT_LOCATOR = "//a[@class='gs-title' and contains(., '%s')]";
 
 	public SearchResultsPage(WebDriver driver, String searchTerm) {
 		super(driver);
@@ -23,7 +23,7 @@ public class SearchResultsPage extends AbstractPage {
 	}
 
 	private String buildSearchResultLocator() {
-		return String.format(defaultSearchResultLocator, searchTerm);
+		return String.format(DEFAULT_SEARCH_RESULT_LOCATOR, searchTerm);
 	}
 
 	@Override
