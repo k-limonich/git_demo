@@ -1,6 +1,6 @@
 package com.epam.training.page.google;
 
-import com.epam.training.page.AbstractPage;
+import com.epam.training.utils.WebDriverUtils;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PriceEstimateBlock extends AbstractPage {
+public class PriceEstimateBlock extends PriceCalculatorPage {
 
 	private final static String TOTAL_COST_REGEX = "(?<=USD\\s)[0-9.]+";
 	private final static String EMPTY_STRING = "";
@@ -21,16 +21,20 @@ public class PriceEstimateBlock extends AbstractPage {
 	@FindBy(xpath = "//button[@id='email_quote']")
 	private WebElement btnEmailEstimate;
 
-	protected PriceEstimateBlock(WebDriver driver) {
+	public PriceEstimateBlock(WebDriver driver) {
 		super(driver);
 	}
 
 	public double getTotalCost() {
 		try {
+			WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
+
 			Pattern pattern = Pattern.compile(TOTAL_COST_REGEX);
 			Matcher matcher = pattern.matcher(wait
 					.until(ExpectedConditions.visibilityOf(totalCostHeader)).getText());
 			String totalCostString = matcher.find() ? matcher.group() : EMPTY_STRING;
+
+			WebDriverUtils.switchToMainFrame(driver);
 			return Double.parseDouble(totalCostString);
 		} catch (NoSuchElementException e) {
 			throw new RuntimeException("Header containing total cost isn't visible [Calculator page]");
@@ -40,8 +44,10 @@ public class PriceEstimateBlock extends AbstractPage {
 	}
 
 	public EmailEstimateForm pressEmailEstimate() {
+		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(btnEmailEstimate))
 				.click();
+		WebDriverUtils.switchToMainFrame(driver);
 		return new EmailEstimateForm(driver);
 	}
 
