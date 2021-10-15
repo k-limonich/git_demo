@@ -1,12 +1,12 @@
 package com.epam.training.page.google;
 
-import com.epam.training.page.AbstractPage;
+import com.epam.training.utils.WebDriverUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class EmailEstimateForm extends AbstractPage {
+public class EmailEstimateForm extends PriceCalculatorPage {
 
 	@FindBy(xpath = "//input[@type='email']")
 	private WebElement emailField;
@@ -19,14 +19,17 @@ public class EmailEstimateForm extends AbstractPage {
 	}
 
 	public EmailEstimateForm enterEmail(String email) {
+		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.visibilityOf(emailField))
 				.sendKeys(email);
+		WebDriverUtils.switchToMainFrame(driver);
 		return this;
 	}
 
-	public PriceEstimateBlock sendEmail() {
+	public void sendEmail() {
+		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(btnSend))
 				.click();
-		return new PriceEstimateBlock(driver);
+		WebDriverUtils.switchToMainFrame(driver);
 	}
 }
