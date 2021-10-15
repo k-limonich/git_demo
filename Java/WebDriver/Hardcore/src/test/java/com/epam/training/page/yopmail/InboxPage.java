@@ -45,7 +45,6 @@ public class InboxPage extends AbstractPage {
 		WebDriverUtils.switchToIFrame(driver, inboxFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(priceEstimateEmail))
 				.click();
-		priceEstimateEmail.click();
 		WebDriverUtils.switchToMainFrame(driver);
 		return this;
 	}
@@ -57,7 +56,6 @@ public class InboxPage extends AbstractPage {
 			Matcher matcher = pattern.matcher(wait
 					.until(ExpectedConditions.visibilityOf(totalCostHeader)).getText());
 			String totalCostString = matcher.find() ? matcher.group() : EMPTY_STRING;
-
 			WebDriverUtils.switchToMainFrame(driver);
 			return Double.parseDouble(totalCostString);
 		} catch (NoSuchElementException e) {
