@@ -14,7 +14,7 @@ public class EmailGeneratorPage extends AbstractPage {
 	@FindBy(xpath = "//span[text()='Check Inbox']")
 	private WebElement btnCheckInbox;
 
-	protected EmailGeneratorPage(WebDriver driver) {
+	public EmailGeneratorPage(WebDriver driver) {
 		super(driver);
 	}
 
