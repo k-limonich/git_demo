@@ -1,7 +1,6 @@
 package com.epam.training.test;
 
 import com.epam.training.page.google.GoogleCloudHomePage;
-import com.epam.training.page.google.PriceCalculatorPage;
 import com.epam.training.page.google.PriceEstimateBlock;
 import com.epam.training.page.yopmail.EmailGeneratorPage;
 import com.epam.training.page.yopmail.YopmailHomePage;
@@ -18,8 +17,6 @@ import static com.epam.training.constants.DdlName.*;
 public class GoogleCloudPriceCalculatorTest {
 
 	private WebDriver driver;
-	private PriceEstimateBlock priceEstimatePage;
-	private EmailGeneratorPage emailGeneratorPage;
 
 	private double calculatorTotalCost;
 	private double emailTotalCost;
@@ -42,13 +39,13 @@ public class GoogleCloudPriceCalculatorTest {
 		driver.manage().window().maximize();
 	}
 
-	@BeforeMethod(description = "Go to pricing calculator page, fill in the form, press ADD TO ESTIMATE")
-	void priceEstimateSetUp() {
-		priceEstimatePage = new GoogleCloudHomePage(driver)
+	@BeforeMethod(alwaysRun = true, description = "go to price calculator page, " +
+			"fill in the form, get estimated total cost")
+	void receiveTotalCostFromCalculator() {
+		calculatorTotalCost = new GoogleCloudHomePage(driver)
 				.openPage()
 				.searchForTerm(TERM)
 				.goToPricingCalculatorPage()
-				.switchToCalculatorFrame()
 				.chooseComputeEngineOption()
 				.enterNumberOfInstances(NUMBER_OF_INSTANCES)
 				.chooseDdlOption(OPERATING_SYSTEM, OPERATING_SYSTEM_OPTION)
@@ -61,45 +58,40 @@ public class GoogleCloudPriceCalculatorTest {
 				.chooseDdlOption(LOCAL_SSD, LOCAL_SSD_OPTION)
 				.chooseDdlOption(DATACENTER_LOCATION, DATACENTER_LOCATION_OPTION)
 				.chooseDdlOption(COMMITTED_USAGE, COMMITTED_USAGE_OPTION)
-				.pressAddToEstimate();
+				.pressAddToEstimate()
+				.getTotalCost();
+	}
 
-		calculatorTotalCost = priceEstimatePage.getTotalCost();
-
+	@BeforeMethod(alwaysRun = true, description = "go to yopmail.com in new tab, " +
+			"generate random email, switch to price calculator page, " +
+			"send email with estimated total cost to generated email, " +
+			"switch back to yopmail.com, get estimated total cost from received email")
+	void receiveTotalCostFromEmail() {
 		WebDriverUtils.openBlankTab(driver);
 		WebDriverUtils.switchTab(driver);
-
-		emailGeneratorPage = new YopmailHomePage(driver)
+		String email = new YopmailHomePage(driver)
 				.openPage()
-				.generateRandomEmail();
-		String email = emailGeneratorPage.copyEmailAddress();
-
+				.generateRandomEmail()
+				.copyEmailAddress();
 		WebDriverUtils.switchTab(driver);
-
-		new PriceCalculatorPage(driver)
-				.switchToEstimateBlock()
+		new PriceEstimateBlock(driver)
 				.pressEmailEstimate()
 				.enterEmail(email)
 				.sendEmail();
-
 		WebDriverUtils.switchTab(driver);
-
-		emailTotalCost = emailGeneratorPage
+		emailTotalCost = new EmailGeneratorPage(driver)
 				.checkInbox()
 				.refreshInbox()
 				.selectPriceEstimateEmail()
 				.getTotalCost();
 	}
 
-//	@BeforeMethod
-//	void emailEstimate() {
-//
-//	}
-
 	@Test
-	void test() {
+	void testCompareTotalCost() {
 		Assert.assertEquals(calculatorTotalCost, emailTotalCost,
-						"Total cost is different (calculator: " + calculatorTotalCost +
-							',' + " email: " + emailTotalCost + ')');
+						"Total cost differs " + '[' +
+								"calculator: " + calculatorTotalCost + ',' +
+								" email: " + emailTotalCost + ']');
 	}
 
 	@AfterMethod(alwaysRun = true)
