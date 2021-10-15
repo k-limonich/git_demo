@@ -11,7 +11,7 @@ public class SearchResultsPage extends AbstractPage {
 
 	private final static String DEFAULT_SEARCH_RESULT_LOCATOR = "//a[@class='gs-title' and contains(., '%s')]";
 
-	public SearchResultsPage(WebDriver driver, String searchTerm) {
+	protected SearchResultsPage(WebDriver driver, String searchTerm) {
 		super(driver);
 		this.searchTerm = searchTerm;
 	}
