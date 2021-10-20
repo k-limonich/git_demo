@@ -18,9 +18,6 @@ public class GoogleCloudPriceCalculatorTest {
 
 	private WebDriver driver;
 
-	private double calculatorTotalCost;
-	private double emailTotalCost;
-
 	private final static String TERM = "Google Cloud Platform Pricing Calculator";
 	private final static int NUMBER_OF_INSTANCES = 4;
 	private final static String OPERATING_SYSTEM_OPTION = "Free: Debian, CentOS, CoreOS, Ubuntu or BYOL";
@@ -39,10 +36,15 @@ public class GoogleCloudPriceCalculatorTest {
 		driver.manage().window().maximize();
 	}
 
-	@BeforeMethod(alwaysRun = true, description = "go to price calculator page, " +
-			"fill in the form, get estimated total cost")
-	void receiveTotalCostFromCalculator() {
-		calculatorTotalCost = new GoogleCloudHomePage(driver)
+	@Test(description = "Go to price calculator page," +
+			"fill in the form, get estimated total cost." +
+			"Open yopmail.com in new tab, generate random email." +
+			"Switch to price calculator page," +
+			"send email with estimated total cost to generated email." +
+			"Switch back to yopmail.com, get estimated total cost from received email." +
+			"Compare total cost from calculator and email.")
+	void testCompareTotalCost() {
+		double calculatorTotalCost = new GoogleCloudHomePage(driver)
 				.openPage()
 				.searchForTerm(TERM)
 				.goToPricingCalculatorPage()
@@ -60,34 +62,30 @@ public class GoogleCloudPriceCalculatorTest {
 				.chooseDdlOption(COMMITTED_USAGE, COMMITTED_USAGE_OPTION)
 				.pressAddToEstimate()
 				.getTotalCost();
-	}
 
-	@BeforeMethod(alwaysRun = true, description = "go to yopmail.com in new tab, " +
-			"generate random email, switch to price calculator page, " +
-			"send email with estimated total cost to generated email, " +
-			"switch back to yopmail.com, get estimated total cost from received email")
-	void receiveTotalCostFromEmail() {
 		WebDriverUtils.openBlankTab(driver);
 		WebDriverUtils.switchTab(driver);
+
 		String email = new YopmailHomePage(driver)
 				.openPage()
 				.generateRandomEmail()
 				.copyEmailAddress();
+
 		WebDriverUtils.switchTab(driver);
+
 		new PriceEstimateBlock(driver)
 				.pressEmailEstimate()
 				.enterEmail(email)
 				.sendEmail();
+
 		WebDriverUtils.switchTab(driver);
-		emailTotalCost = new EmailGeneratorPage(driver)
+
+		double emailTotalCost = new EmailGeneratorPage(driver)
 				.checkInbox()
 				.refreshInbox()
 				.selectPriceEstimateEmail()
 				.getTotalCost();
-	}
 
-	@Test
-	void testCompareTotalCost() {
 		Assert.assertEquals(calculatorTotalCost, emailTotalCost,
 						"Total cost differs " + '[' +
 								"calculator: " + calculatorTotalCost + ',' +
