@@ -1,7 +1,6 @@
 package com.epam.training.page.yopmail;
 
 import com.epam.training.page.AbstractPage;
-import com.epam.training.utils.WebDriverUtils;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,21 +41,21 @@ public class InboxPage extends AbstractPage {
 	}
 
 	public InboxPage selectPriceEstimateEmail() {
-		WebDriverUtils.switchToIFrame(driver, inboxFrame);
+		switchToIFrame(inboxFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(priceEstimateEmail))
 				.click();
-		WebDriverUtils.switchToMainFrame(driver);
+		switchToMainFrame();
 		return this;
 	}
 
 	public double getTotalCost() {
 		try {
-			WebDriverUtils.switchToIFrame(driver, emailContentFrame);
+			switchToIFrame(emailContentFrame);
 			Pattern pattern = Pattern.compile(TOTAL_COST_REGEX);
 			Matcher matcher = pattern.matcher(wait
 					.until(ExpectedConditions.visibilityOf(totalCostHeader)).getText());
 			String totalCostString = matcher.find() ? matcher.group() : EMPTY_STRING;
-			WebDriverUtils.switchToMainFrame(driver);
+			switchToMainFrame();
 			return Double.parseDouble(totalCostString);
 		} catch (NoSuchElementException e) {
 			throw new RuntimeException("Header containing total cost isn't visible [Email Inbox page]");
