@@ -1,12 +1,18 @@
 package com.epam.training.page.google;
 
-import com.epam.training.utils.WebDriverUtils;
+import com.epam.training.page.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class EmailEstimateForm extends PriceCalculatorPage {
+public class EmailEstimateForm extends AbstractPage {
+
+	@FindBy(xpath = "//devsite-iframe/iframe")
+	private WebElement baseCalculatorFrame;
+
+	@FindBy(xpath = "//div[@class='cp-header']/iframe")
+	private WebElement nestedCalculatorFrame;
 
 	@FindBy(xpath = "//input[@type='email']")
 	private WebElement emailField;
@@ -19,17 +25,17 @@ public class EmailEstimateForm extends PriceCalculatorPage {
 	}
 
 	public EmailEstimateForm enterEmail(String email) {
-		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
+		switchToIFrame(baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.visibilityOf(emailField))
 				.sendKeys(email);
-		WebDriverUtils.switchToMainFrame(driver);
+		switchToMainFrame();
 		return this;
 	}
 
 	public void sendEmail() {
-		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
+		switchToIFrame(baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(btnSend))
 				.click();
-		WebDriverUtils.switchToMainFrame(driver);
+		switchToMainFrame();
 	}
 }
