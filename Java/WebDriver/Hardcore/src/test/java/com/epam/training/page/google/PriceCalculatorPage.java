@@ -2,7 +2,6 @@ package com.epam.training.page.google;
 
 import com.epam.training.constants.DdlName;
 import com.epam.training.page.AbstractPage;
-import com.epam.training.utils.WebDriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,10 +11,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class PriceCalculatorPage extends AbstractPage {
 
 	@FindBy(xpath = "//devsite-iframe/iframe")
-	protected WebElement baseCalculatorFrame;
+	private WebElement baseCalculatorFrame;
 
 	@FindBy(xpath = "//div[@class='cp-header']/iframe")
-	protected WebElement nestedCalculatorFrame;
+	private WebElement nestedCalculatorFrame;
 
 	@FindBy(xpath = "//md-tab-item/div[@title='Compute Engine']")
 	private WebElement computeEngineOption;
@@ -37,30 +36,30 @@ public class PriceCalculatorPage extends AbstractPage {
 	}
 
 	public PriceCalculatorPage chooseComputeEngineOption() {
-		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
+		switchToIFrame(baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(computeEngineOption))
 				.click();
-		WebDriverUtils.switchToMainFrame(driver);
+		switchToMainFrame();
 		return this;
 	}
 
 	public PriceCalculatorPage enterNumberOfInstances(int number) {
-		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
+		switchToIFrame(baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.visibilityOf(instancesInput))
 				.sendKeys(String.valueOf(number));
-		WebDriverUtils.switchToMainFrame(driver);
+		switchToMainFrame();
 		return this;
 	}
 
 	public PriceCalculatorPage chooseDdlOption(DdlName ddlName, String option) {
-		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
+		switchToIFrame(baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 				buildDdlLocator(ddlName.toString()))))
 				.click();
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 				buildDdlOptionLocator(option))))
 				.click();
-		WebDriverUtils.switchToMainFrame(driver);
+		switchToMainFrame();
 		return this;
 	}
 
@@ -73,18 +72,18 @@ public class PriceCalculatorPage extends AbstractPage {
 	}
 
 	public PriceCalculatorPage enableAddGPUsCheckbox() {
-		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
+		switchToIFrame(baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(addGPUsButton))
 				.click();
-		WebDriverUtils.switchToMainFrame(driver);
+		switchToMainFrame();
 		return this;
 	}
 
 	public PriceEstimateBlock pressAddToEstimate() {
-		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
+		switchToIFrame(baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(addToEstimateButton))
 				.click();
-		WebDriverUtils.switchToMainFrame(driver);
+		switchToMainFrame();
 		return new PriceEstimateBlock(driver);
 	}
 }
