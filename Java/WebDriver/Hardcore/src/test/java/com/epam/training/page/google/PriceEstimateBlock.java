@@ -1,6 +1,6 @@
 package com.epam.training.page.google;
 
-import com.epam.training.utils.WebDriverUtils;
+import com.epam.training.page.AbstractPage;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,10 +10,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PriceEstimateBlock extends PriceCalculatorPage {
+public class PriceEstimateBlock extends AbstractPage {
 
 	private final static String TOTAL_COST_REGEX = "(?<=USD\\s)[0-9.]+";
 	private final static String EMPTY_STRING = "";
+
+	@FindBy(xpath = "//devsite-iframe/iframe")
+	private WebElement baseCalculatorFrame;
+
+	@FindBy(xpath = "//div[@class='cp-header']/iframe")
+	private WebElement nestedCalculatorFrame;
 
 	@FindBy(xpath = "//h2[@class='md-title']/b")
 	private WebElement totalCostHeader;
@@ -27,14 +33,13 @@ public class PriceEstimateBlock extends PriceCalculatorPage {
 
 	public double getTotalCost() {
 		try {
-			WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
-
+			switchToIFrame(baseCalculatorFrame, nestedCalculatorFrame);
 			Pattern pattern = Pattern.compile(TOTAL_COST_REGEX);
 			Matcher matcher = pattern.matcher(wait
 					.until(ExpectedConditions.visibilityOf(totalCostHeader)).getText());
 			String totalCostString = matcher.find() ? matcher.group() : EMPTY_STRING;
 
-			WebDriverUtils.switchToMainFrame(driver);
+			switchToMainFrame();
 			return Double.parseDouble(totalCostString);
 		} catch (NoSuchElementException e) {
 			throw new RuntimeException("Header containing total cost isn't visible [Calculator page]");
@@ -44,10 +49,10 @@ public class PriceEstimateBlock extends PriceCalculatorPage {
 	}
 
 	public EmailEstimateForm pressEmailEstimate() {
-		WebDriverUtils.switchToIFrame(driver, baseCalculatorFrame, nestedCalculatorFrame);
+		switchToIFrame(baseCalculatorFrame, nestedCalculatorFrame);
 		wait.until(ExpectedConditions.elementToBeClickable(btnEmailEstimate))
 				.click();
-		WebDriverUtils.switchToMainFrame(driver);
+		switchToMainFrame();
 		return new EmailEstimateForm(driver);
 	}
 
