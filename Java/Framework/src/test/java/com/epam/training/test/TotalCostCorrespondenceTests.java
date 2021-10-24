@@ -37,7 +37,7 @@ public class TotalCostCorrespondenceTests extends CommonConditions {
 		WebDriverUtils.switchTab(driver);
 		double emailTotalCost = new EmailGeneratorPage(driver)
 				.checkInbox()
-				.selectPriceEstimateEmail()
+				.selectTotalCostEmail()
 				.getTotalCost();
 		Assert.assertEquals(calculatorTotalCost, emailTotalCost,
 						"Total cost differs " + '[' +
