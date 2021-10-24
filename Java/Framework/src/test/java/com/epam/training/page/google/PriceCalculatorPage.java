@@ -99,17 +99,12 @@ public class PriceCalculatorPage extends AbstractPage {
 		return this;
 	}
 
-	public Double getTotalCost() {
-		try {
-			switchToIFrame(iframeFormBase, iframeFormNested);
-			String totalCostString = StringUtils
-					.extractSubstring(headerTotalCost.getText(), TOTAL_COST_REGEX);
-			switchToMainFrame();
-			return Double.parseDouble(totalCostString);
-		} catch (NoSuchElementException e) {
-			logger.error("Failed to find header containing total cost on calculator page");
-		}
-		return null;
+	public double getTotalCost() {
+		switchToIFrame(iframeFormBase, iframeFormNested);
+		String totalCostString = StringUtils
+				.extractSubstring(headerTotalCost.getText(), TOTAL_COST_REGEX);
+		switchToMainFrame();
+		return Double.parseDouble(totalCostString);
 	}
 
 	public PriceCalculatorPage pressEmailEstimate() {
