@@ -18,8 +18,8 @@ public class CalculatorFormFiller {
 
 	public static CalculatorForm withDataFromProperty() {
 		CalculatorForm calculatorForm = new CalculatorForm();
-		calculatorForm.setNumberOfInstances(Integer.parseInt(TestDataReader
-				.getTestData(TESTDATA_CALCULATOR_FORM_NUMBER_OF_INSTANCES)));
+		calculatorForm.setNumberOfInstances(TestDataReader
+				.getTestData(TESTDATA_CALCULATOR_FORM_NUMBER_OF_INSTANCES));
 		calculatorForm.setOperatingSystem(TestDataReader
 				.getTestData(TESTDATA_CALCULATOR_FORM_OPERATING_SYSTEM));
 		calculatorForm.setMachineClass(TestDataReader
@@ -30,8 +30,8 @@ public class CalculatorFormFiller {
 				.getTestData(TESTDATA_CALCULATOR_FORM_MACHINE_TYPE));
 		calculatorForm.setNeedGPUs(Boolean.parseBoolean(TestDataReader
 				.getTestData(TESTDATA_CALCULATOR_FORM_ADD_GPUS)));
-		calculatorForm.setNumberOfGPUs(Integer.parseInt(TestDataReader
-				.getTestData(TESTDATA_CALCULATOR_FORM_NUMBER_OF_GPUS)));
+		calculatorForm.setNumberOfGPUs(TestDataReader
+				.getTestData(TESTDATA_CALCULATOR_FORM_NUMBER_OF_GPUS));
 		calculatorForm.setGpuType(TestDataReader
 				.getTestData(TESTDATA_CALCULATOR_FORM_GPU_TYPE));
 		calculatorForm.setLocalSSD(TestDataReader
