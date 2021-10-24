@@ -7,7 +7,6 @@ import com.epam.training.util.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,8 +14,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PriceCalculatorPage extends AbstractPage {
-
-	private final Logger logger = LogManager.getRootLogger();
 
 	@FindBy(xpath = "//devsite-iframe/iframe")
 	private WebElement iframeFormBase;
@@ -78,18 +75,14 @@ public class PriceCalculatorPage extends AbstractPage {
 	}
 
 	private void chooseOption(String field, String option) {
-		try {
-			new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-					StringUtils.buildLocator(DDL_BASE_LOCATOR, field))))
-					.click();
-			new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
-					StringUtils.buildLocator(DDL_OPTION_BASE_LOCATOR, option))))
-					.click();
-		} catch (NoSuchElementException e) {
-			logger.error("Failed to choose option for field \"" + field + "\" in calculator form");
-		}
+		new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+						StringUtils.buildLocator(DDL_BASE_LOCATOR, field))))
+				.click();
+		new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+						StringUtils.buildLocator(DDL_OPTION_BASE_LOCATOR, option))))
+				.click();
 	}
 
 	public PriceCalculatorPage pressAddToEstimate() {
