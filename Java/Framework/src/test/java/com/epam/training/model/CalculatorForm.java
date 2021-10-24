@@ -1,5 +1,7 @@
 package com.epam.training.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class CalculatorForm {
@@ -20,8 +22,10 @@ public class CalculatorForm {
 		return String.valueOf(numberOfInstances);
 	}
 
-	public void setNumberOfInstances(int numberOfInstances) {
-		this.numberOfInstances = numberOfInstances;
+	public void setNumberOfInstances(String numberOfInstances) {
+		this.numberOfInstances = StringUtils.isNumeric(numberOfInstances)
+				? Integer.parseInt(numberOfInstances)
+				: 0;
 	}
 
 	public String getOperatingSystem() {
@@ -68,8 +72,10 @@ public class CalculatorForm {
 		return String.valueOf(numberOfGPUs);
 	}
 
-	public void setNumberOfGPUs(int numberOfGPUs) {
-		this.numberOfGPUs = numberOfGPUs;
+	public void setNumberOfGPUs(String numberOfGPUs) {
+		this.numberOfGPUs = StringUtils.isNumeric(numberOfGPUs)
+				? Integer.parseInt(numberOfGPUs)
+				: 0;
 	}
 
 	public String getGpuType() {
