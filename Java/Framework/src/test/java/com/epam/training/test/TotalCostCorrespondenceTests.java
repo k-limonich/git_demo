@@ -22,7 +22,7 @@ public class TotalCostCorrespondenceTests extends CommonConditions {
 				.goToPricingCalculatorPage()
 				.fillInForm(form)
 				.pressAddToEstimate();
-		Double calculatorTotalCost = priceCalculatorPage.getTotalCost();
+		double calculatorTotalCost = priceCalculatorPage.getTotalCost();
 		WebDriverUtils.openBlankTab(driver);
 		WebDriverUtils.switchTab(driver);
 		String email = new YopmailHomePage(driver)
@@ -35,9 +35,8 @@ public class TotalCostCorrespondenceTests extends CommonConditions {
 				.enterEmail(email)
 				.sendEmail();
 		WebDriverUtils.switchTab(driver);
-		Double emailTotalCost = new EmailGeneratorPage(driver)
+		double emailTotalCost = new EmailGeneratorPage(driver)
 				.checkInbox()
-				.refreshInbox()
 				.selectPriceEstimateEmail()
 				.getTotalCost();
 		Assert.assertEquals(calculatorTotalCost, emailTotalCost,
