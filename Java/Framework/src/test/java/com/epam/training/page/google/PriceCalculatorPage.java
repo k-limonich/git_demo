@@ -4,8 +4,6 @@ import com.epam.training.constants.Fields;
 import com.epam.training.model.CalculatorForm;
 import com.epam.training.page.AbstractPage;
 import com.epam.training.util.StringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
