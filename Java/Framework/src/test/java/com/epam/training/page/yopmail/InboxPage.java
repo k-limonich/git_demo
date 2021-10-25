@@ -35,13 +35,16 @@ public class InboxPage extends AbstractPage {
 	}
 
 	public InboxPage selectTotalCostEmail() {
-		for (int refreshCounter = 0; refreshCounter < 5; refreshCounter++) {
+		for (int refreshCounter = 0; refreshCounter < 10; refreshCounter++) {
 			switchToIFrame(iframeInbox);
 			List<WebElement> totalCostEmail = driver.findElements(BY_TOTAL_COST_EMAIL_LOCATOR);
 			if (totalCostEmail.isEmpty()) {
 				switchToMainFrame();
 				refreshInbox();
-			} else break;
+			} else {
+				totalCostEmail.get(0).click();
+				break;
+			}
 		}
 		switchToMainFrame();
 		return this;
