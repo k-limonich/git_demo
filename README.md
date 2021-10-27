@@ -1,2 +1,2 @@
 # git_demo
-Repository contains stage 1 tasks from automation testing epam training
+Repository contains tasks from epam automation testing training
